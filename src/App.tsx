@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 // auth route
 import AuthProvider from "./auth/AuthProvider";
 import PrivateRoute from "./auth/PrivateRoute";
@@ -65,6 +70,7 @@ const App = () => {
         <Router>
           <Navbar />
           <Routes>
+            <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/diwan" element={<Diwan />} />
