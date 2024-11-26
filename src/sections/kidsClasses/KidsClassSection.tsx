@@ -20,16 +20,21 @@ import {
 import { validation } from "../../components/form/validations";
 import SubmitButton from "../../components/form/SubmitButton";
 import AlphaDatePicker from "../../components/form/AlphaDatePicker";
+import axiosInstance from "../../api/AxiosInstance";
+import { ENDPOINTS } from "../../api/endPoints/EndPoints";
 
 function KidsClassSection() {
   const { token } = theme.useToken();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [current, setCurrent] = useState(1);
+  const [current, setCurrent] = useState(0);
 
   const showModal = () => setIsModalOpen(true);
-  const handleOk = () => setIsModalOpen(false);
-  const handleCancel = () => setIsModalOpen(false);
+  const handleCancel = () => {
+    setCurrent(0);
+    form.resetFields();
+    setIsModalOpen(false);
+  };
 
   const timeData = [
     { label: "12:30 AM - 1:30 PM", value: "12:30 AM - 1:30 PM" },
@@ -42,7 +47,19 @@ function KidsClassSection() {
   const slot = Form.useWatch("slot", { form, preserve: true });
 
   const onFinishStep1 = async (values: any) => {
-    setCurrent(1);
+    try {
+      setLoading(true);
+      const Response = await axiosInstance.post(ENDPOINTS.KIDS_CLASSES.STEP_1, {
+        services: values.services,
+        noOfKids: +values.noOfKids,
+      });
+      if (Response.status !== 200) throw new Error("Something went wrong");
+      console.log(Response);
+    } catch (err: any) {
+      console.log(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
   const onFinishStep2 = async (values: any) => {
     setCurrent(2);
@@ -66,7 +83,7 @@ function KidsClassSection() {
                 marginTop: 0,
               }}
             >
-              Langar Seva
+              Kids Classes
             </Typography.Title>{" "}
             <Typography.Paragraph
               style={{
@@ -74,13 +91,12 @@ function KidsClassSection() {
                 textAlign: "center",
               }}
             >
-              The SSGA appreciates your co-operation and understanding in
-              preparing a simple Langar as per Guru-Maryada. The management
-              would appreciate it if all Langar items be prepared within
-              Gurudwara’ s Kitchen. Please contact the management of Singh Sabha
-              or Bhai Sahib if you have plans to bring ready-to-go langar items
-              that are not prepared within Gurdwara’ s kitchen to ensure
-              Maryada.
+              Punjabi classes are held on the first Saturday of every month,
+              before the Diwan at the Presbyterian Church, according to the
+              following schedule: <br /> Gurmat Class: 10:30AM-11:15 AM Gurmukhi
+              Class: 11:15 AM-12:00 PM <br /> Currently we have three levels for
+              kids based on their age and their familiarity with Gurmukhi and
+              Gurmat.
             </Typography.Paragraph>
             <CustomButton
               style={{ alignSelf: "center" }}
@@ -127,15 +143,16 @@ function KidsClassSection() {
           >
             <Flex vertical>
               <AlphaSelectField
-                name="service"
+                name="services"
                 placeholder="Select Service"
                 options={[
-                  { label: "swiming", value: "swiming" },
-                  { label: "Gaming", value: "gaming" },
+                  { label: "Swimming", value: "swimming" },
+                  { label: "Dancing", value: "dancing" },
+                  { label: "Painting", value: "painting" },
                 ]}
               />
               <AlphaTextField
-                name="kids"
+                name="noOfKids"
                 placeholder="Number of kids"
                 maxLength={5}
                 rules={[

@@ -2,8 +2,8 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://api.example.com", // Replace with your API URL
-  timeout: 10000, // Timeout in ms
+  baseURL: "http://localhost:3005", // Replace with your API URL
+  timeout: 30000, // Timeout in ms
   headers: {
     "Content-Type": "application/json",
   },
@@ -28,7 +28,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => response,
   (error) => {
-    console.error(error.response?.data || "An error occurred");
+    console.error(error || "An error occurred");
     return Promise.reject(error);
   }
 );

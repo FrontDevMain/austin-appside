@@ -14,6 +14,7 @@ function ContactUsSection() {
   const { token } = theme.useToken();
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const ImageStyle: React.CSSProperties = {
     height: 100,
@@ -34,11 +35,15 @@ function ContactUsSection() {
 
   const onFinish = async (values: any) => {
     try {
+      setErrorMessage("");
+      setSuccessMessage("");
       setLoading(true);
       const Response = await axiosInstance.post(ENDPOINTS.CONTACT_US, {
         ...values,
       });
       if (Response.status !== 200) throw new Error("Something went wrong");
+      setSuccessMessage(Response.data.message);
+      form.resetFields();
     } catch (err: any) {
       setErrorMessage(err.message);
     } finally {
@@ -139,6 +144,9 @@ function ContactUsSection() {
         </Col>
       </Row>
       <Form form={form} name="basic" onFinish={onFinish} layout="vertical">
+        {successMessage && (
+          <Alert message={successMessage} type="success" showIcon closeIcon />
+        )}
         {errorMessage && <Alert message={errorMessage} type="error" showIcon />}
         <Row style={{ margin: "2vh 0", justifyContent: "center" }} gutter={32}>
           <Col span={12}>

@@ -1,4 +1,4 @@
-import { Col, Flex, Row, Typography } from "antd";
+import { Col, Divider, Flex, Form, Input, Modal, Row, Typography } from "antd";
 import langarImg from "../../assets/images/langerseva.svg";
 import CustomButton from "../../components/CustomButton";
 import { useState } from "react";
@@ -6,8 +6,25 @@ import image1 from "../../assets/images/langerSeva/image 24.svg";
 import image2 from "../../assets/images/langerSeva/image 25.svg";
 import image3 from "../../assets/images/langerSeva/image 7.svg";
 import image4 from "../../assets/images/langerSeva/image 5.svg";
+import { AlphaTextField } from "../../components/form";
+import { validation } from "../../components/form/validations";
+import AlphaDatePicker from "../../components/form/AlphaDatePicker";
+import SubmitButton from "../../components/form/SubmitButton";
 
 function LangarSection() {
+  const [form] = Form.useForm();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    form.resetFields();
+  };
+
   const [data, setData] = useState([
     {
       id: 0,
@@ -50,6 +67,11 @@ function LangarSection() {
       link: "",
     },
   ]);
+
+  const onFinish = (values: any) => {
+    console.log(values);
+  };
+
   return (
     <>
       <Row style={{ margin: "6vh 0" }} gutter={48}>
@@ -79,7 +101,10 @@ function LangarSection() {
               that are not prepared within Gurdwara’ s kitchen to ensure
               Maryada.
             </Typography.Paragraph>
-            <CustomButton style={{ alignSelf: "center" }}>
+            <CustomButton
+              style={{ alignSelf: "center" }}
+              onClick={() => showModal()}
+            >
               Book Now
             </CustomButton>
           </Flex>
@@ -140,6 +165,70 @@ function LangarSection() {
           </Col>
         ))}
       </Row>
+      <Modal
+        title="Langar"
+        open={isModalOpen}
+        onCancel={handleCancel}
+        width={1000}
+        footer={null}
+      >
+        {" "}
+        <Divider style={{ margin: 0 }} />
+        <Form form={form} name="basic" onFinish={onFinish} layout="vertical">
+          <Row style={{ margin: "2vh 0" }} gutter={32}>
+            <Col span={12}>
+              <AlphaTextField
+                name="fullName"
+                placeholder="Full Name"
+                rules={[validation.required(), validation.maxLength(30)]}
+              />
+            </Col>
+            <Col span={12}>
+              <AlphaTextField
+                name="email"
+                placeholder="Email"
+                type="email"
+                rules={[validation.required(), validation.maxLength(30)]}
+              />
+            </Col>
+            <Col span={12}>
+              <AlphaTextField
+                name="phoneNumber"
+                placeholder="Phone No."
+                maxLength={10}
+                rules={[
+                  validation.required(),
+                  validation.onlyNumbers(),
+                  validation.minLength(10),
+                ]}
+              />
+            </Col>
+            <Col span={12}>
+              <AlphaDatePicker
+                name="dateOfBooking"
+                placeholder="DD/MM/YYYY"
+                format={"DD/MM/YYYY"}
+                rules={[validation.required()]}
+              />
+            </Col>
+            <Col span={24}>
+              <Form.Item
+                label={""}
+                name={"message"}
+                rules={[validation.required()]}
+              >
+                <Input.TextArea placeholder="Message" allowClear rows={6} />
+              </Form.Item>
+            </Col>
+
+            <Flex justify="center" style={{ width: "100%" }}>
+              <SubmitButton loading={loading} form={form}>
+                Send
+              </SubmitButton>
+            </Flex>
+          </Row>
+        </Form>
+      </Modal>
     </>
   );
 }
