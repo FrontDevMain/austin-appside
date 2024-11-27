@@ -11,7 +11,7 @@ import PrivateRoute from "./auth/PrivateRoute";
 
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
+import Login from "./pages/auth/Login";
 import Donate from "./pages/Donate";
 import { ConfigProvider, theme } from "antd";
 import Footer from "./components/Footer";
@@ -22,6 +22,10 @@ import EventBooking from "./pages/EventBooking";
 import KidsClasses from "./pages/KidsClasses";
 import ContactUs from "./pages/ContactUs";
 import ScrollToTop from "./components/scroll-to-top";
+import UserLayout from "./layout/UserLayout";
+import GuestLayout from "./layout/GuestLayout";
+import Register from "./pages/auth/Register";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 
 const App = () => {
   return (
@@ -32,6 +36,7 @@ const App = () => {
           colorTextSecondary: "#FF7315",
           borderRadius: 8,
           fontSize: 16,
+          colorLink: "#FF7315",
         },
         components: {
           Menu: {
@@ -70,25 +75,27 @@ const App = () => {
         <Router>
           <Navbar />
           <Routes>
-            <Route path="/" element={<Navigate to="/home" />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/diwan" element={<Diwan />} />
-            <Route path="/langer-seva" element={<LangerSeva />} />
-            <Route path="/live-events" element={<LiveEvents />} />
-            <Route path="/event-booking" element={<EventBooking />} />
-            <Route path="/kids-classes" element={<KidsClasses />} />
-            <Route path="/contact-us" element={<ContactUs />} />
-            <Route
-              path="/donation"
-              element={
-                // <PrivateRoute>
-                <Donate />
-                // </PrivateRoute>
-              }
-            />
+            <Route path="/" element={<UserLayout />}>
+              <Route path="/home" element={<Home />} />
+              <Route path="/diwan" element={<Diwan />} />
+              <Route path="/langer-seva" element={<LangerSeva />} />
+              <Route path="/live-events" element={<LiveEvents />} />
+              <Route path="/event-booking" element={<EventBooking />} />
+              <Route path="/kids-classes" element={<KidsClasses />} />
+              <Route path="/contact-us" element={<ContactUs />} />
+              <Route path="/donation" element={<Donate />} />
+              <Route path="/auth" element={<GuestLayout />}>
+                <Route path="/auth/login" element={<Login />} />
+                <Route path="/auth/Register" element={<Register />} />
+                <Route
+                  path="/auth/forgot-password"
+                  element={<ForgotPassword />}
+                />
+              </Route>
+            </Route>
           </Routes>
           <Footer />
+
           <ScrollToTop />
         </Router>
       </AuthProvider>

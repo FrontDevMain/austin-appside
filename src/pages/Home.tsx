@@ -13,7 +13,7 @@ function Home() {
         style={{
           width: "100vw",
           height: "85vh",
-          backgroundColor: token.colorPrimary,
+          backgroundColor: token.colorText,
           overflow: "visible",
         }}
       >

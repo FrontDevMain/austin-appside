@@ -16,15 +16,17 @@ import akhandImg from "../../assets/images/eventBookibgs/akhand.svg";
 import birthdayImg from "../../assets/images/eventBookibgs/birthday.svg";
 import sehajImg from "../../assets/images/eventBookibgs/sahajPath.svg";
 import CustomButton from "../../components/CustomButton";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { AlpharadioGroupField, AlphaTextField } from "../../components/form";
 import { validation } from "../../components/form/validations";
 import SubmitButton from "../../components/form/SubmitButton";
 import AlphaDatePicker from "../../components/form/AlphaDatePicker";
 import axiosInstance from "../../api/AxiosInstance";
 import { ENDPOINTS } from "../../api/endPoints/EndPoints";
+import { AuthContext } from "../../layout/UserLayout";
 
 function EventBookingSection() {
+  const { isAuthenticated }: any = useContext(AuthContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -34,7 +36,7 @@ function EventBookingSection() {
 
   const showModal = (val: string) => {
     setEventType(val);
-    setIsModalOpen(true);
+    isAuthenticated() && setIsModalOpen(true);
   };
 
   const handleCancel = () => {
