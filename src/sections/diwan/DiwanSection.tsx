@@ -1,8 +1,9 @@
 import diwanImg from "../../assets/images/diwanImg.svg";
-import { Col, Flex, Row, theme, Typography } from "antd";
+import { Col, Flex, Grid, Row, theme, Typography } from "antd";
 
 function DiwanSection() {
   const { token } = theme.useToken();
+  const screens = Grid.useBreakpoint();
 
   const timeTable = [
     { time: "11:30 AM", title: "Sangat and Kids Kirtan" },
@@ -13,8 +14,14 @@ function DiwanSection() {
 
   return (
     <>
-      <Row style={{ margin: "6vh 0" }} gutter={48}>
-        <Col span={12}>
+      <Row
+        style={{
+          margin: "6vh 0",
+          flexDirection: screens.md ? "row" : "column-reverse",
+        }}
+        gutter={32}
+      >
+        <Col span={screens.md ? 12 : 24}>
           <Flex vertical style={{ height: "inherit" }}>
             {" "}
             <Typography.Title level={1}>Program Schedule</Typography.Title>{" "}
@@ -30,7 +37,7 @@ function DiwanSection() {
           <ul>
             {timeTable.map((item) => (
               <li style={{ listStyle: token.colorText }}>
-                <Row gutter={32}>
+                <Row gutter={48}>
                   <Col span={6}>
                     <Typography.Paragraph
                       style={{
@@ -73,7 +80,10 @@ function DiwanSection() {
             </Typography.Paragraph>
           </div>
         </Col>
-        <Col span={12} style={{ justifyItems: "center", alignSelf: "center" }}>
+        <Col
+          span={screens.md ? 12 : 24}
+          style={{ justifyItems: "center", alignSelf: "center" }}
+        >
           <img
             src={diwanImg}
             alt="Place of Peace"

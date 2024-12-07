@@ -1,4 +1,14 @@
-import { Col, Divider, Flex, Form, Input, Modal, Row, Typography } from "antd";
+import {
+  Col,
+  Divider,
+  Flex,
+  Form,
+  Grid,
+  Input,
+  Modal,
+  Row,
+  Typography,
+} from "antd";
 import langarImg from "../../assets/images/langerseva.svg";
 import CustomButton from "../../components/CustomButton";
 import { useState } from "react";
@@ -12,6 +22,7 @@ import AlphaDatePicker from "../../components/form/AlphaDatePicker";
 import SubmitButton from "../../components/form/SubmitButton";
 
 function LangarSection() {
+  const screens = Grid.useBreakpoint();
   const [form] = Form.useForm();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -74,9 +85,21 @@ function LangarSection() {
 
   return (
     <>
-      <Row style={{ margin: "6vh 0" }} gutter={48}>
-        <Col span={12} style={{ justifyItems: "center", alignSelf: "center" }}>
-          <Flex vertical style={{ height: "inherit", width: "80%" }}>
+      <Row
+        style={{
+          margin: "6vh 0",
+          flexDirection: screens.md ? "row" : "column-reverse",
+        }}
+        gutter={48}
+      >
+        <Col
+          span={screens.md ? 12 : 24}
+          style={{ justifyItems: "center", alignSelf: "center" }}
+        >
+          <Flex
+            vertical
+            style={{ height: "inherit", width: screens.md ? "80%" : "95%" }}
+          >
             <Typography.Title
               level={1}
               style={{
@@ -109,7 +132,10 @@ function LangarSection() {
             </CustomButton>
           </Flex>
         </Col>
-        <Col span={12} style={{ justifyItems: "center", alignSelf: "center" }}>
+        <Col
+          span={screens.md ? 12 : 24}
+          style={{ justifyItems: "center", alignSelf: "center" }}
+        >
           <img
             src={langarImg}
             alt="Place of Peace"
@@ -117,9 +143,15 @@ function LangarSection() {
           />
         </Col>
       </Row>
-      <Row style={{ margin: "16vh 0", height: "fit-content" }} gutter={16}>
+      <Row
+        style={{ margin: "10vh 0", height: "fit-content" }}
+        gutter={screens.md ? 16 : 48}
+      >
         {data.map((item) => (
-          <Col span={6}>
+          <Col
+            span={screens.md ? 6 : 24}
+            style={{ marginTop: screens.md ? 0 : 50 }}
+          >
             <div
               style={{
                 boxShadow: "0px 4px 8px 0px #00000040",

@@ -1,4 +1,4 @@
-import { Col, Divider, Flex, Form, Modal, Row, Typography } from "antd";
+import { Col, Divider, Flex, Form, Grid, Modal, Row, Typography } from "antd";
 import CustomButton from "../../components/CustomButton";
 import image1 from "../../assets/images/donation.svg";
 import { AlphaSelectField, AlphaTextField } from "../../components/form";
@@ -9,6 +9,7 @@ import axiosInstance from "../../api/AxiosInstance";
 import { ENDPOINTS } from "../../api/endPoints/EndPoints";
 
 function DonationSection() {
+  const screens = Grid.useBreakpoint();
   const [form] = Form.useForm();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -44,8 +45,17 @@ function DonationSection() {
 
   return (
     <>
-      <Row style={{ margin: "6vh 0" }} gutter={48}>
-        <Col span={12} style={{ justifyItems: "center", alignSelf: "center" }}>
+      <Row
+        style={{
+          margin: "6vh 0",
+          flexDirection: screens.md ? "row" : "column-reverse",
+        }}
+        gutter={48}
+      >
+        <Col
+          span={screens.md ? 12 : 24}
+          style={{ justifyItems: "center", alignSelf: "center" }}
+        >
           <Flex vertical style={{ height: "inherit" }}>
             <Typography.Title
               level={1}
@@ -88,7 +98,10 @@ function DonationSection() {
             </CustomButton>
           </Flex>
         </Col>
-        <Col span={12} style={{ justifyItems: "center", alignSelf: "center" }}>
+        <Col
+          span={screens.md ? 12 : 24}
+          style={{ justifyItems: "center", alignSelf: "center" }}
+        >
           <img
             src={image1}
             alt="Place of Peace"

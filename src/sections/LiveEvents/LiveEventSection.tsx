@@ -1,10 +1,11 @@
 import { FileImageFilled } from "@ant-design/icons";
-import { Col, Flex, Row, theme, Typography } from "antd";
+import { Col, Flex, Grid, Row, theme, Typography } from "antd";
 import CustomButton from "../../components/CustomButton";
 import { useState } from "react";
 
 function LiveEventSection() {
   const { token } = theme.useToken();
+  const screens = Grid.useBreakpoint();
 
   const data = [
     {
@@ -47,7 +48,7 @@ function LiveEventSection() {
         </Typography.Paragraph>
         <Typography.Title
           style={{
-            fontSize: 72,
+            fontSize: screens.md ? 72 : 48,
             marginTop: 0,
             textAlign: "center",
           }}
@@ -61,11 +62,12 @@ function LiveEventSection() {
               boxShadow: "0px 4px 8px 0px #00000040",
               alignItems: "center",
               marginBottom: 50,
+              padding: 20,
             }}
             gutter={32}
           >
-            <Col span={4}></Col>
-            <Col span={16} style={{ alignItems: "center" }}>
+            <Col span={screens.md ? 4 : 24}></Col>
+            <Col span={screens.md ? 16 : 24} style={{ alignItems: "center" }}>
               <Typography.Title level={4}>{item.title}</Typography.Title>
               <Typography.Paragraph>{item.desc}</Typography.Paragraph>
               <Typography.Paragraph style={{ color: token.colorTextSecondary }}>

@@ -21,7 +21,8 @@ function Login() {
       setSuccessMessage("");
       setLoading(true);
       const Response = await axiosInstance.post(ENDPOINTS.LOGIN, {
-        ...values,
+        email: values.email,
+        password: values.password,
       });
       if (Response.status !== 200) throw new Error("Something went wrong");
       setSuccessMessage(Response.data.message);
@@ -60,14 +61,9 @@ function Login() {
           </Col>
           <Col span={24}>
             <AlphaTextField
-              name="pasword"
+              name="password"
               placeholder="Enter Password"
-              maxLength={10}
-              rules={[
-                validation.required(),
-                validation.onlyNumbers(),
-                validation.minLength(10),
-              ]}
+              rules={[validation.required()]}
             />
           </Col>
           <Col span={24}>

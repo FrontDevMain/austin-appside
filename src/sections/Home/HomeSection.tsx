@@ -1,4 +1,4 @@
-import { Col, Flex, Row, Space, theme, Typography } from "antd";
+import { Col, Flex, Grid, Row, Space, theme, Typography } from "antd";
 import homeSection1Img from "../../assets/images/place.svg";
 import homeSection2Img from "../../assets/images/connect.svg";
 
@@ -6,21 +6,28 @@ const { useToken } = theme;
 
 function HomeSection() {
   const { token } = useToken();
+  const screens = Grid.useBreakpoint();
   const cardData = ["Join us", "Upcoming Events", "Make a Donation"];
 
   return (
-    <Space direction="vertical" size={"large"} style={{ padding: "20vh 0" }}>
+    <Space
+      direction={"vertical"}
+      size={"large"}
+      style={{ padding: "20vh 0 5vh" }}
+    >
       {/* section 1 */}
       <Row>
-        <Col span={8} offset={4}>
+        <Col span={screens.md ? 8 : 20} offset={screens.md ? 4 : 2}>
           <Typography.Paragraph type="secondary" style={{ marginBottom: 0 }}>
             WELCOME
           </Typography.Paragraph>
-          <Typography.Title style={{ fontSize: 72, marginTop: 0 }}>
+          <Typography.Title
+            style={{ fontSize: screens.md ? 72 : 48, marginTop: 0 }}
+          >
             Who Are We?
           </Typography.Title>
         </Col>
-        <Col span={8}>
+        <Col span={screens.md ? 8 : 20} offset={screens.md ? 0 : 2}>
           <Typography.Paragraph style={{ fontSize: 16 }}>
             The Singh Sabha Gurdwara of Austin represents the activity and goals
             of the wider sangat in Austin, Texas. Since 1995, the Gurdwara has
@@ -38,10 +45,10 @@ function HomeSection() {
 
       {/* section 1 cards */}
       <Row>
-        <Col offset={4} span={16}>
-          <Row>
+        <Col offset={screens.md ? 4 : 2} span={screens.md ? 20 : 22}>
+          <Row gutter={[16, 16]}>
             {cardData.map((item, index) => (
-              <Col span={8}>
+              <Col span={screens.md ? 8 : 24}>
                 <Space
                   direction="vertical"
                   size={"large"}
@@ -79,7 +86,7 @@ function HomeSection() {
       </Row>
 
       {/* section 2 */}
-      <Row style={{ margin: "15vh 0 5vh" }}>
+      <Row style={{ margin: "10vh 0 2vh" }}>
         <Col offset={4} span={16}>
           <Typography.Paragraph
             style={{
@@ -92,7 +99,7 @@ function HomeSection() {
           </Typography.Paragraph>
           <Typography.Title
             style={{
-              fontSize: 72,
+              fontSize: screens.md ? 72 : 48,
               marginTop: 0,
               textAlign: "center",
             }}
@@ -125,7 +132,7 @@ function HomeSection() {
           </Typography.Paragraph>
           <Row style={{ marginTop: "6vh" }} gutter={48}>
             <Col
-              span={12}
+              span={screens.md ? 12 : 24}
               style={{ justifyItems: "center", alignSelf: "center" }}
             >
               <img
@@ -135,7 +142,7 @@ function HomeSection() {
               />
             </Col>
             <Col
-              span={12}
+              span={screens.md ? 12 : 24}
               style={{ justifyItems: "center", alignSelf: "center" }}
             >
               <Flex vertical style={{ height: "inherit", width: "80%" }}>
@@ -163,9 +170,15 @@ function HomeSection() {
             </Col>
           </Row>
 
-          <Row style={{ marginTop: "6vh" }} gutter={48}>
+          <Row
+            style={{
+              marginTop: "6vh",
+              flexDirection: screens.md ? "row" : "column-reverse",
+            }}
+            gutter={32}
+          >
             <Col
-              span={12}
+              span={screens.md ? 12 : 24}
               style={{ justifyItems: "center", alignSelf: "center" }}
             >
               <Flex vertical style={{ height: "inherit", width: "80%" }}>
@@ -191,7 +204,7 @@ function HomeSection() {
               </Flex>
             </Col>
             <Col
-              span={12}
+              span={screens.md ? 12 : 24}
               style={{ justifyItems: "center", alignSelf: "center" }}
             >
               <img

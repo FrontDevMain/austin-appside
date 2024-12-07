@@ -26,10 +26,13 @@ axiosInstance.interceptors.request.use(
 
 // Response interceptor
 axiosInstance.interceptors.response.use(
-  (response: AxiosResponse) => response,
+  (response: AxiosResponse) => {
+    console.log(response);
+    return response;
+  },
   (error) => {
     console.error(error || "An error occurred");
-    return Promise.reject(error);
+    return Promise.reject(error.response.data.error);
   }
 );
 

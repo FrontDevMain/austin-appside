@@ -1,6 +1,7 @@
 // src/api/endpoints.ts
 export const ENDPOINTS = {
   LOGIN: "/api/v1/auth/login",
+  REGISTER: "/api/v1/auth/register",
   CONTACT_US: "/api/v1/auth/contact-us",
   EVENT_BOOKING: "/api/v1/booking/create",
   KIDS_CLASSES: {

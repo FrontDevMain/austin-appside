@@ -1,4 +1,14 @@
-import { Alert, Col, Flex, Form, Input, Row, theme, Typography } from "antd";
+import {
+  Alert,
+  Col,
+  Flex,
+  Form,
+  Grid,
+  Input,
+  Row,
+  theme,
+  Typography,
+} from "antd";
 import call from "../../assets/Icons/call.svg";
 import draft from "../../assets/Icons/drafts.svg";
 import distance from "../../assets/Icons/distance.svg";
@@ -11,6 +21,7 @@ import { ENDPOINTS } from "../../api/endPoints/EndPoints";
 import { AxiosError } from "axios";
 
 function ContactUsSection() {
+  const screens = Grid.useBreakpoint();
   const { token } = theme.useToken();
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -53,8 +64,8 @@ function ContactUsSection() {
 
   return (
     <div style={{ margin: "5vh 0" }}>
-      <Row gutter={16} style={{ alignItems: "center" }}>
-        <Col span={8}>
+      <Row gutter={[16, 16]} style={{ alignItems: "center" }}>
+        <Col span={screens.md ? 8 : 24}>
           <div style={CardStyle}>
             <img src={call} style={ImageStyle} />
             <Typography.Title level={3} style={{ textAlign: "center" }}>
@@ -66,7 +77,7 @@ function ContactUsSection() {
             </Typography.Paragraph>
           </div>
         </Col>
-        <Col span={8}>
+        <Col span={screens.md ? 8 : 24}>
           <div style={CardStyle}>
             <img src={draft} style={ImageStyle} />
             <Typography.Title level={3} style={{ textAlign: "center" }}>
@@ -106,7 +117,7 @@ function ContactUsSection() {
             </Typography.Paragraph>
           </div>
         </Col>
-        <Col span={8}>
+        <Col span={screens.md ? 8 : 24}>
           <div style={CardStyle}>
             <img src={distance} style={ImageStyle} />
             <Typography.Title level={3} style={{ textAlign: "center" }}>
@@ -135,8 +146,9 @@ function ContactUsSection() {
           </Typography.Paragraph>
           <Typography.Title
             style={{
-              fontSize: 72,
+              fontSize: screens.md ? 72 : 48,
               marginTop: 0,
+              textAlign: "center",
             }}
           >
             Connect with Us
@@ -149,21 +161,21 @@ function ContactUsSection() {
         )}
         {errorMessage && <Alert message={errorMessage} type="error" showIcon />}
         <Row style={{ margin: "2vh 0", justifyContent: "center" }} gutter={32}>
-          <Col span={12}>
+          <Col span={screens.md ? 12 : 24}>
             <AlphaTextField
               name="firstName"
               placeholder="First Name"
               rules={[validation.required(), validation.maxLength(30)]}
             />
           </Col>
-          <Col span={12}>
+          <Col span={screens.md ? 12 : 24}>
             <AlphaTextField
               name="lastName"
               placeholder="Last Name"
               rules={[validation.required(), validation.maxLength(30)]}
             />
           </Col>
-          <Col span={12}>
+          <Col span={screens.md ? 12 : 24}>
             <AlphaTextField
               name="email"
               placeholder="Email"
@@ -171,7 +183,7 @@ function ContactUsSection() {
               rules={[validation.required(), validation.maxLength(30)]}
             />
           </Col>
-          <Col span={12}>
+          <Col span={screens.md ? 12 : 24}>
             <AlphaTextField
               name="phoneNumber"
               placeholder="Phone No."

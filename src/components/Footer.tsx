@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import bgImage from "../assets/images/footerBg.svg";
-import { Col, Flex, Row, theme, Typography } from "antd";
+import { Col, Flex, Grid, Row, Space, theme, Typography } from "antd";
 import Logo from "./Logo";
 
 const { useToken } = theme;
 
 function Footer() {
+  const screens = Grid.useBreakpoint();
   const { token } = useToken();
   const [isHover, setIsHover] = useState("");
   const footerData = [
@@ -57,16 +58,20 @@ function Footer() {
           height: "100%",
           backgroundPosition: "50% 0%",
           backgroundRepeat: "no-repeat",
-          padding: "100px 0",
+          padding: screens.md ? "100px 0" : "10px",
         }}
       >
         <Row>
-          <Col span={2} offset={4}>
-            <Logo />
+          <Col span={screens.md ? 2 : 0} offset={screens.md ? 4 : 2}>
+            {screens.md ? (
+              <Space style={{ height: 100 }}>
+                <Logo />
+              </Space>
+            ) : null}
           </Col>
           {footerData.map((item) => {
             return (
-              <Col span={4}>
+              <Col span={screens.md ? 4 : 8}>
                 <Typography.Title
                   level={4}
                   style={{ color: "#fff", marginTop: 0 }}
@@ -98,7 +103,7 @@ function Footer() {
               </Col>
             );
           })}
-          <Col span={4}>
+          <Col span={screens.md ? 4 : 24}>
             <Typography.Title level={5} style={{ color: "#fff", marginTop: 0 }}>
               Contacts
             </Typography.Title>
@@ -129,29 +134,35 @@ function Footer() {
         </Row>
       </div>
       <Row style={{ backgroundColor: "#092050", padding: "50px 0" }}>
-        <Col offset={4}>
+        <Col offset={screens.md ? 4 : 1}>
           <Typography.Paragraph style={{ color: "#ffffff", fontSize: 13 }}>
             &#169; 2024 All Rights Reserved
           </Typography.Paragraph>
           <Flex gap={"large"}>
-            {footerSecurity.map((item) => {
-              return (
-                <Typography.Link
-                  key={item.label}
-                  style={{
-                    display: "block",
-                    width: "fit-content",
-                    color:
-                      isHover == item.label ? token.colorTextSecondary : "#fff",
-                    fontSize: 14,
-                  }}
-                  onMouseEnter={() => setIsHover(item.label)}
-                  onMouseLeave={() => setIsHover("")}
-                >
-                  {item.label}
-                </Typography.Link>
-              );
-            })}
+            <Row>
+              {footerSecurity.map((item) => {
+                return (
+                  <Col span={screens.md ? 8 : 24}>
+                    <Typography.Link
+                      key={item.label}
+                      style={{
+                        display: "block",
+                        width: "fit-content",
+                        color:
+                          isHover == item.label
+                            ? token.colorTextSecondary
+                            : "#fff",
+                        fontSize: 14,
+                      }}
+                      onMouseEnter={() => setIsHover(item.label)}
+                      onMouseLeave={() => setIsHover("")}
+                    >
+                      {item.label}
+                    </Typography.Link>
+                  </Col>
+                );
+              })}
+            </Row>
           </Flex>
         </Col>
       </Row>

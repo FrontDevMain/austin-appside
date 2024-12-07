@@ -3,6 +3,7 @@ import {
   Divider,
   Flex,
   Form,
+  Grid,
   Modal,
   Row,
   Steps,
@@ -24,6 +25,7 @@ import axiosInstance from "../../api/AxiosInstance";
 import { ENDPOINTS } from "../../api/endPoints/EndPoints";
 
 function KidsClassSection() {
+  const screens = Grid.useBreakpoint();
   const { token } = theme.useToken();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -72,8 +74,17 @@ function KidsClassSection() {
   };
   return (
     <>
-      <Row style={{ margin: "6vh 0" }} gutter={48}>
-        <Col span={12} style={{ justifyItems: "center", alignSelf: "center" }}>
+      <Row
+        style={{
+          margin: "6vh 0",
+          flexDirection: screens.md ? "row" : "column-reverse",
+        }}
+        gutter={48}
+      >
+        <Col
+          span={screens.md ? 12 : 24}
+          style={{ justifyItems: "center", alignSelf: "center" }}
+        >
           <Flex vertical style={{ height: "inherit" }}>
             <Typography.Title
               level={1}
@@ -106,7 +117,10 @@ function KidsClassSection() {
             </CustomButton>
           </Flex>
         </Col>
-        <Col span={12} style={{ justifyItems: "center", alignSelf: "center" }}>
+        <Col
+          span={screens.md ? 12 : 24}
+          style={{ justifyItems: "center", alignSelf: "center" }}
+        >
           <img
             src={image1}
             alt="Place of Peace"

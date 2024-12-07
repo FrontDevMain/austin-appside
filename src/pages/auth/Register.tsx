@@ -20,10 +20,16 @@ function Register() {
       setErrorMessage("");
       setSuccessMessage("");
       setLoading(true);
-      const Response = await axiosInstance.post(ENDPOINTS.LOGIN, {
-        ...values,
+      const Response = await axiosInstance.post(ENDPOINTS.REGISTER, {
+        firstName: values.fName,
+        lastName: values.lName,
+        email: values.email,
+        password: values.password,
+        confirmPassword: values.confirmPassword,
+        termsAndConditions: true,
       });
-      if (Response.status !== 200) throw new Error("Something went wrong");
+      console.log(Response);
+      if (Response.status !== 200) throw new Error(Response.data.error.message);
       setSuccessMessage(Response.data.message);
       form.resetFields();
     } catch (err: any) {
@@ -74,26 +80,16 @@ function Register() {
           </Col>
           <Col span={24}>
             <AlphaTextField
-              name="pasword"
+              name="password"
               placeholder="Enter Password"
-              maxLength={10}
-              rules={[
-                validation.required(),
-                validation.onlyNumbers(),
-                validation.minLength(10),
-              ]}
+              rules={[validation.required()]}
             />
           </Col>
           <Col span={24}>
             <AlphaTextField
-              name="pasword"
+              name="confirmPassword"
               placeholder="Confirm Password"
-              maxLength={10}
-              rules={[
-                validation.required(),
-                validation.onlyNumbers(),
-                validation.minLength(10),
-              ]}
+              rules={[validation.required()]}
             />
           </Col>
           <Col span={24}>
@@ -105,6 +101,7 @@ function Register() {
                   value: "I agree to all terms & privacy policy",
                 },
               ]}
+              rules={[validation.required()]}
             />
           </Col>
           <Col span={24}>

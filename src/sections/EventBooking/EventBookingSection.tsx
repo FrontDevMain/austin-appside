@@ -4,6 +4,7 @@ import {
   Divider,
   Flex,
   Form,
+  Grid,
   Input,
   Modal,
   Row,
@@ -24,8 +25,11 @@ import AlphaDatePicker from "../../components/form/AlphaDatePicker";
 import axiosInstance from "../../api/AxiosInstance";
 import { ENDPOINTS } from "../../api/endPoints/EndPoints";
 import { AuthContext } from "../../layout/UserLayout";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function EventBookingSection() {
+  const navigate = useNavigate();
+  const screens = Grid.useBreakpoint();
   const { isAuthenticated }: any = useContext(AuthContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -36,7 +40,7 @@ function EventBookingSection() {
 
   const showModal = (val: string) => {
     setEventType(val);
-    isAuthenticated() && setIsModalOpen(true);
+    setIsModalOpen(true);
   };
 
   const handleCancel = () => {
@@ -52,7 +56,7 @@ function EventBookingSection() {
   };
 
   const timeData = [
-    { label: "12:30 AM - 1:30 PM", value: "12:30am- 1:30pm" },
+    { label: "12:30 AM - 1:30 PM", value: "12:30am-1:30pm" },
     { label: "1:30 PM - 2:30 PM", value: "1:30pm-2:30pm" },
     { label: "2:30 PM - 3:30 PM", value: "2:30pm-3:30pm" },
     { label: "3:30 PM - 4:30 PM", value: "3:30pm-4:30pm" },
@@ -99,7 +103,7 @@ function EventBookingSection() {
           <Alert message={successMessage} type="success" showIcon closeIcon />
         )}
         <Row gutter={[16, 16]}>
-          <Col span={12}>
+          <Col span={screens.md ? 12 : 24}>
             <Row dir="vertical" gutter={[16, 16]}>
               <Col span={24}>
                 <div
@@ -137,7 +141,10 @@ function EventBookingSection() {
                     </Typography.Title>
                     <CustomButton
                       style={{ margin: 10 }}
-                      onClick={() => showModal("wedding")}
+                      onClick={() => {
+                        if (isAuthenticated()) showModal("wedding");
+                        else navigate("/auth/login");
+                      }}
                     >
                       Book
                     </CustomButton>
@@ -189,11 +196,11 @@ function EventBookingSection() {
               </Col>
             </Row>
           </Col>
-          <Col span={12}>
+          <Col span={screens.md ? 12 : 24}>
             <Row dir="vertical" gutter={[16, 16]}>
               <Col span={24}>
                 <Row gutter={[16, 16]}>
-                  <Col span={12}>
+                  <Col span={screens.md ? 12 : 24}>
                     <div
                       style={{
                         position: "relative",
@@ -236,7 +243,7 @@ function EventBookingSection() {
                       </Flex>
                     </div>
                   </Col>
-                  <Col span={12}>
+                  <Col span={screens.md ? 12 : 24}>
                     <div
                       style={{
                         position: "relative",
