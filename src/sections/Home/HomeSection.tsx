@@ -45,7 +45,7 @@ function HomeSection() {
 
       {/* section 1 cards */}
       <Row>
-        <Col offset={screens.md ? 4 : 2} span={screens.md ? 20 : 22}>
+        <Col offset={screens.md ? 4 : 2} span={screens.md ? 16 : 22}>
           <Row gutter={[16, 16]}>
             {cardData.map((item, index) => (
               <Col span={screens.md ? 8 : 24}>

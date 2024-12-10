@@ -6,8 +6,10 @@ import SubmitButton from "../../components/form/SubmitButton";
 import axiosInstance from "../../api/AxiosInstance";
 import { ENDPOINTS } from "../../api/endPoints/EndPoints";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../auth/AuthProvider";
 
 function Register() {
+  const { login } = useAuth();
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -28,9 +30,11 @@ function Register() {
         confirmPassword: values.confirmPassword,
         termsAndConditions: true,
       });
-      console.log(Response);
-      if (Response.status !== 200) throw new Error(Response.data.error.message);
-      setSuccessMessage(Response.data.message);
+      if (Response.status !== 201) throw new Error(Response.data.error.message);
+      setSuccessMessage(Response.data.data.message);
+      localStorage.setItem("auth_austin", Response.data.data.user);
+      login(Response.data.data.user);
+      navigate("home");
       form.resetFields();
     } catch (err: any) {
       setErrorMessage(err.message);

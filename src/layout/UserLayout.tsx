@@ -10,7 +10,7 @@ export default function UserLayout() {
       typeof window !== "undefined" &&
       typeof window.localStorage !== "undefined"
     ) {
-      const authData = localStorage.getItem("auth");
+      const authData = localStorage.getItem("auth_austin");
       if (authData) {
         isAuthenticated = true;
       }

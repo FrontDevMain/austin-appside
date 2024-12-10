@@ -1,4 +1,14 @@
-import { Col, Divider, Flex, Form, Grid, Modal, Row, Typography } from "antd";
+import {
+  Alert,
+  Col,
+  Divider,
+  Flex,
+  Form,
+  Grid,
+  Modal,
+  Row,
+  Typography,
+} from "antd";
 import CustomButton from "../../components/CustomButton";
 import image1 from "../../assets/images/donation.svg";
 import { AlphaSelectField, AlphaTextField } from "../../components/form";
@@ -7,8 +17,15 @@ import { useState } from "react";
 import SubmitButton from "../../components/form/SubmitButton";
 import axiosInstance from "../../api/AxiosInstance";
 import { ENDPOINTS } from "../../api/endPoints/EndPoints";
+import { useAuth } from "../../auth/AuthProvider";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function DonationSection() {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const { isUserAuthenticate } = useAuth();
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const screens = Grid.useBreakpoint();
   const [form] = Form.useForm();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,6 +41,8 @@ function DonationSection() {
   };
 
   const onFinish = async (values: any) => {
+    setErrorMessage("");
+    setSuccessMessage("");
     try {
       setLoading(true);
       const Response = await axiosInstance.post(ENDPOINTS.DONATE, {
@@ -35,8 +54,10 @@ function DonationSection() {
         causeOfDonation: values.causeOfDonation,
       });
       if (Response.status !== 200) throw new Error("Something went wrong");
-      console.log(Response);
+      setSuccessMessage(Response.data.message);
+      handleCancel();
     } catch (err: any) {
+      setErrorMessage(err.message);
       console.log(err.message);
     } finally {
       setLoading(false);
@@ -92,7 +113,13 @@ function DonationSection() {
             </Typography.Paragraph>
             <CustomButton
               style={{ alignSelf: "center" }}
-              onClick={() => showModal()}
+              onClick={() =>
+                isUserAuthenticate()
+                  ? showModal()
+                  : navigate("/auth/login", {
+                      state: { callbackPath: pathname },
+                    })
+              }
             >
               Donate
             </CustomButton>
@@ -119,6 +146,12 @@ function DonationSection() {
         {" "}
         <Divider style={{ margin: 0 }} />
         <Form form={form} name="basic" onFinish={onFinish} layout="vertical">
+          {successMessage && (
+            <Alert message={successMessage} type="success" showIcon closeIcon />
+          )}
+          {errorMessage && (
+            <Alert message={errorMessage} type="error" showIcon closeIcon />
+          )}
           <Row style={{ margin: "2vh 0" }} gutter={32}>
             <Col span={6}>
               <AlphaSelectField

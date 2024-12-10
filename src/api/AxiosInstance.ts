@@ -2,7 +2,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3005", // Replace with your API URL
+  baseURL: "https://api.gurdwara.neosprintindia.com",
   timeout: 30000, // Timeout in ms
   headers: {
     "Content-Type": "application/json",
@@ -12,11 +12,11 @@ const axiosInstance = axios.create({
 // Request interceptor
 axiosInstance.interceptors.request.use(
   (config: any) => {
-    const token = localStorage.getItem("token");
-    if (token) {
+    const data: any = localStorage.getItem("auth_austin");
+    if (data?.token) {
       config.headers = {
         ...config.headers,
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${data?.token}`,
       };
     }
     return config;

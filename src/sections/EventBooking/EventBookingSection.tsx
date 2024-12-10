@@ -5,7 +5,6 @@ import {
   Flex,
   Form,
   Grid,
-  Input,
   Modal,
   Row,
   Space,
@@ -17,20 +16,21 @@ import akhandImg from "../../assets/images/eventBookibgs/akhand.svg";
 import birthdayImg from "../../assets/images/eventBookibgs/birthday.svg";
 import sehajImg from "../../assets/images/eventBookibgs/sahajPath.svg";
 import CustomButton from "../../components/CustomButton";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { AlpharadioGroupField, AlphaTextField } from "../../components/form";
 import { validation } from "../../components/form/validations";
 import SubmitButton from "../../components/form/SubmitButton";
 import AlphaDatePicker from "../../components/form/AlphaDatePicker";
 import axiosInstance from "../../api/AxiosInstance";
 import { ENDPOINTS } from "../../api/endPoints/EndPoints";
-import { AuthContext } from "../../layout/UserLayout";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../auth/AuthProvider";
 
 function EventBookingSection() {
+  const { pathname } = useLocation();
+  const { isUserAuthenticate } = useAuth();
   const navigate = useNavigate();
   const screens = Grid.useBreakpoint();
-  const { isAuthenticated }: any = useContext(AuthContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -76,7 +76,7 @@ function EventBookingSection() {
         timeSlot: values.timeSlot,
         type: eventType,
       });
-      if (Response.status !== 200) throw new Error("Something went wrong");
+      if (Response.status !== 201) throw new Error("Something went wrong");
       setSuccessMessage(Response.data.message);
       form.resetFields();
       handleCancel();
@@ -142,8 +142,11 @@ function EventBookingSection() {
                     <CustomButton
                       style={{ margin: 10 }}
                       onClick={() => {
-                        if (isAuthenticated()) showModal("wedding");
-                        else navigate("/auth/login");
+                        isUserAuthenticate()
+                          ? showModal("wedding")
+                          : navigate("/auth/login", {
+                              state: { callbackPath: pathname },
+                            });
                       }}
                     >
                       Book
@@ -187,7 +190,13 @@ function EventBookingSection() {
                     </Typography.Title>
                     <CustomButton
                       style={{ margin: 10 }}
-                      onClick={() => showModal("langar")}
+                      onClick={() => {
+                        isUserAuthenticate()
+                          ? showModal("langar")
+                          : navigate("/auth/login", {
+                              state: { callbackPath: pathname },
+                            });
+                      }}
                     >
                       Book
                     </CustomButton>
@@ -236,7 +245,13 @@ function EventBookingSection() {
                         </Typography.Title>
                         <CustomButton
                           style={{ margin: 10 }}
-                          onClick={() => showModal("akhand path")}
+                          onClick={() => {
+                            isUserAuthenticate()
+                              ? showModal("akhand path")
+                              : navigate("/auth/login", {
+                                  state: { callbackPath: pathname },
+                                });
+                          }}
                         >
                           Book
                         </CustomButton>
@@ -278,7 +293,13 @@ function EventBookingSection() {
                         </Typography.Title>
                         <CustomButton
                           style={{ margin: 10 }}
-                          onClick={() => showModal("birthday")}
+                          onClick={() => {
+                            isUserAuthenticate()
+                              ? showModal("birthday")
+                              : navigate("/auth/login", {
+                                  state: { callbackPath: pathname },
+                                });
+                          }}
                         >
                           Book
                         </CustomButton>
@@ -322,7 +343,13 @@ function EventBookingSection() {
                     </Typography.Title>
                     <CustomButton
                       style={{ margin: 10 }}
-                      onClick={() => showModal("sehaj path")}
+                      onClick={() => {
+                        isUserAuthenticate()
+                          ? showModal("sehaj path")
+                          : navigate("/auth/login", {
+                              state: { callbackPath: pathname },
+                            });
+                      }}
                     >
                       Book
                     </CustomButton>
@@ -399,7 +426,7 @@ function EventBookingSection() {
 
             <Flex justify="center" style={{ width: "100%" }}>
               <SubmitButton loading={loading} form={form}>
-                Send Message
+                Book Now
               </SubmitButton>
             </Flex>
           </Row>

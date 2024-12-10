@@ -23,10 +23,15 @@ import SubmitButton from "../../components/form/SubmitButton";
 import AlphaDatePicker from "../../components/form/AlphaDatePicker";
 import axiosInstance from "../../api/AxiosInstance";
 import { ENDPOINTS } from "../../api/endPoints/EndPoints";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../auth/AuthProvider";
 
 function KidsClassSection() {
+  const { pathname } = useLocation();
+  const { isUserAuthenticate } = useAuth();
+  const navigate = useNavigate();
   const screens = Grid.useBreakpoint();
-  const { token } = theme.useToken();
+  const [slotId, setSlotId] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [current, setCurrent] = useState(0);
@@ -34,15 +39,16 @@ function KidsClassSection() {
   const showModal = () => setIsModalOpen(true);
   const handleCancel = () => {
     setCurrent(0);
+    setSlotId("");
     form.resetFields();
     setIsModalOpen(false);
   };
 
   const timeData = [
-    { label: "12:30 AM - 1:30 PM", value: "12:30 AM - 1:30 PM" },
-    { label: "1:30 PM - 2:30 PM", value: "1:30 PM - 2:30 PM" },
-    { label: "2:30 PM - 3:30 PM", value: "2:30 PM - 3:30 PM" },
-    { label: "3:30 PM - 4:30 PM", value: "3:30 PM - 4:30 PM" },
+    { label: "12:30 AM - 1:30 PM", value: "12:30am-1:30pm" },
+    { label: "1:30 PM - 2:30 PM", value: "1:30pm-2:30pm" },
+    { label: "2:30 PM - 3:30 PM", value: "2:30pm-3:30pm" },
+    { label: "3:30 PM - 4:30 PM", value: "3:30pm-4:30pm" },
   ];
 
   const [form] = Form.useForm();
@@ -55,23 +61,83 @@ function KidsClassSection() {
         services: values.services,
         noOfKids: +values.noOfKids,
       });
-      if (Response.status !== 200) throw new Error("Something went wrong");
-      console.log(Response);
+      if (Response.status != 201) throw new Error("Something went wrong");
+      setSlotId(Response.data.kidsClass?._id);
+      setCurrent(1);
     } catch (err: any) {
       console.log(err.message);
     } finally {
       setLoading(false);
     }
   };
+
   const onFinishStep2 = async (values: any) => {
-    setCurrent(2);
+    try {
+      setLoading(true);
+      const Response = await axiosInstance.post(
+        ENDPOINTS.KIDS_CLASSES.STEP_2(slotId),
+        {
+          date: values.date,
+          timeSlot: values.slot,
+        }
+      );
+      if (Response.status != 200) throw new Error("Something went wrong");
+      setCurrent(2);
+    } catch (err: any) {
+      console.log(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
+
   const onFinishStep3 = async (values: any) => {
-    setCurrent(3);
+    try {
+      setLoading(true);
+      const Response = await axiosInstance.post(
+        ENDPOINTS.KIDS_CLASSES.STEP_3(slotId),
+        {
+          firstName: values.firstName,
+          lastName: values.lastName,
+          email: values.email,
+          phoneNumber: values.phoneNumber,
+          age: +values.age,
+          shirtSize: values.size,
+          gurmukhiLessons: values.gurmukhiLessons == "yes" ? true : false,
+          additionalInfo: values.etc,
+        }
+      );
+      if (Response.status != 200) throw new Error("Something went wrong");
+      setCurrent(3);
+    } catch (err: any) {
+      console.log(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
+
   const onFinishStep4 = async (values: any) => {
-    setCurrent(4);
+    try {
+      setLoading(true);
+      const Response = await axiosInstance.post(
+        ENDPOINTS.KIDS_CLASSES.STEP_4(slotId),
+        {
+          parentName: values.parentsName,
+          parentEmail: values.parentsEmailId,
+          parentPhoneNo: values.parentsContact,
+          kirtanAndTabla: values.tablaInterest,
+          volunteering: values.volunteering == "yes" ? true : false,
+          punjabiGoals: values.goals,
+        }
+      );
+      if (Response.status != 200) throw new Error("Something went wrong");
+      setCurrent(4);
+    } catch (err: any) {
+      console.log(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
+
   return (
     <>
       <Row
@@ -111,7 +177,13 @@ function KidsClassSection() {
             </Typography.Paragraph>
             <CustomButton
               style={{ alignSelf: "center" }}
-              onClick={() => showModal()}
+              onClick={() => {
+                isUserAuthenticate()
+                  ? showModal()
+                  : navigate("/auth/login", {
+                      state: { callbackPath: pathname },
+                    });
+              }}
             >
               Book Now
             </CustomButton>
@@ -192,7 +264,7 @@ function KidsClassSection() {
           >
             <Flex vertical>
               <AlphaDatePicker
-                name="service"
+                name="date"
                 placeholder="DD/MM/YYYY"
                 format={"DD/MM/YYYY"}
                 rules={[validation.required()]}
@@ -258,6 +330,18 @@ function KidsClassSection() {
                 />
               </Col>
               <Col span={12}>
+                <AlphaSelectField
+                  name="size"
+                  placeholder="All Student - Sweatshirt/ T-Shirt Size"
+                  options={[
+                    { label: "S", value: "S" },
+                    { label: "M", value: "M" },
+                    { label: "L", value: "L" },
+                    { label: "XL", value: "XL" },
+                  ]}
+                />
+              </Col>
+              <Col span={12}>
                 <AlphaTextField
                   name="age"
                   placeholder="Student Age"
@@ -267,29 +351,20 @@ function KidsClassSection() {
               </Col>
               <Col span={12}>
                 <AlphaSelectField
-                  name="lessonBefore"
+                  name="gurmukhiLessons"
                   placeholder="Has your child taken Gurmukhi lessons before?"
                   options={[
                     { label: "Yes", value: "yes" },
                     { label: "No", value: "no" },
                   ]}
+                  rules={[validation.required()]}
                 />
               </Col>
-              <Col span={12}>
-                <AlphaSelectField
-                  name="size"
-                  placeholder="All Student - Sweatshirt/ T-Shirt Size"
-                  options={[
-                    { label: "Yes", value: "yes" },
-                    { label: "No", value: "no" },
-                  ]}
-                />
-              </Col>
+
               <Col span={12}>
                 <AlphaTextField
                   name="etc"
                   placeholder="Anything else we need to know about the students"
-                  maxLength={2}
                   rules={[validation.required()]}
                 />
               </Col>
@@ -343,8 +418,10 @@ function KidsClassSection() {
                   name="tablaInterest"
                   placeholder="Will your be interested for learning Kirtan & Tabla?"
                   options={[
-                    { label: "Yes", value: "yes" },
-                    { label: "No", value: "no" },
+                    { label: "Only Kirtan", value: "onlyKirtan" },
+                    { label: "Only Tabla", value: "onlyTabla" },
+                    { label: "Both", value: "both" },
+                    { label: "None", value: "none" },
                   ]}
                 />
               </Col>

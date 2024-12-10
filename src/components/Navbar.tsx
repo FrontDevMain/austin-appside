@@ -13,10 +13,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import Logo from "./Logo";
 import hamburgerIcon from "../assets/Icons/hamburger.svg";
+import { useAuth } from "../auth/AuthProvider";
 
 const { useToken } = theme;
 
 const Navbar = () => {
+  const { user, logout } = useAuth();
   const { token } = useToken();
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -103,7 +105,7 @@ const Navbar = () => {
             <Typography.Link
               className={isHover || current ? "scale-content" : ""}
               onClick={() => {
-                navigate("/auth/login");
+                user ? logout() : navigate("/auth/login");
               }}
               onMouseEnter={() => setIsHover("login")}
               onMouseLeave={() => setIsHover("")}
@@ -121,7 +123,7 @@ const Navbar = () => {
                 cursor: "pointer",
               }}
             >
-              Login
+              {user ? "Logout" : " Login"}
             </Typography.Link>
             <Typography.Paragraph
               className="donate_button"
@@ -188,7 +190,7 @@ const Navbar = () => {
           <Typography.Link
             className={isHover || current ? "scale-content" : ""}
             onClick={() => {
-              navigate("/auth/login");
+              user ? logout() : navigate("/auth/login");
             }}
             onMouseEnter={() => setIsHover("login")}
             onMouseLeave={() => setIsHover("")}
@@ -206,7 +208,7 @@ const Navbar = () => {
               cursor: "pointer",
             }}
           >
-            Login
+            {user ? "Logout" : " Login"}
           </Typography.Link>
           <Typography.Paragraph
             className="donate_button"

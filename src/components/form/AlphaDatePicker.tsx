@@ -21,7 +21,7 @@ export default function AlphaDatePicker({
           type: "mask",
         }}
         type="date"
-        // maxDate={dayjs(new Date())}
+        minDate={dayjs(new Date())}
         style={{ width: "100%" }}
         disabled={!!disabled}
       />

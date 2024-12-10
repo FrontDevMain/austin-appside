@@ -5,9 +5,12 @@ import { validation } from "../../components/form/validations";
 import SubmitButton from "../../components/form/SubmitButton";
 import axiosInstance from "../../api/AxiosInstance";
 import { ENDPOINTS } from "../../api/endPoints/EndPoints";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../auth/AuthProvider";
 
 function Login() {
+  const { login } = useAuth();
+  const { state } = useLocation();
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -21,11 +24,12 @@ function Login() {
       setSuccessMessage("");
       setLoading(true);
       const Response = await axiosInstance.post(ENDPOINTS.LOGIN, {
-        email: values.email,
+        email: values.email.toLowerCase(),
         password: values.password,
       });
       if (Response.status !== 200) throw new Error("Something went wrong");
-      setSuccessMessage(Response.data.message);
+      login(Response.data.data);
+      navigate(state.callbackPath || "/home");
       form.resetFields();
     } catch (err: any) {
       setErrorMessage(err.message);

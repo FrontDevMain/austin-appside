@@ -1,4 +1,5 @@
 import {
+  Alert,
   Col,
   Divider,
   Flex,
@@ -16,14 +17,22 @@ import image1 from "../../assets/images/langerSeva/image 24.svg";
 import image2 from "../../assets/images/langerSeva/image 25.svg";
 import image3 from "../../assets/images/langerSeva/image 7.svg";
 import image4 from "../../assets/images/langerSeva/image 5.svg";
-import { AlphaTextField } from "../../components/form";
+import { AlpharadioGroupField, AlphaTextField } from "../../components/form";
 import { validation } from "../../components/form/validations";
 import AlphaDatePicker from "../../components/form/AlphaDatePicker";
 import SubmitButton from "../../components/form/SubmitButton";
+import axiosInstance from "../../api/AxiosInstance";
+import { ENDPOINTS } from "../../api/endPoints/EndPoints";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../auth/AuthProvider";
 
 function LangarSection() {
+  const { pathname } = useLocation();
+  const { isUserAuthenticate } = useAuth();
+  const navigate = useNavigate();
   const screens = Grid.useBreakpoint();
   const [form] = Form.useForm();
+  const [successMessage, setSuccessMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -35,6 +44,13 @@ function LangarSection() {
     setIsModalOpen(false);
     form.resetFields();
   };
+
+  const timeData = [
+    { label: "12:30 AM - 1:30 PM", value: "12:30am-1:30pm" },
+    { label: "1:30 PM - 2:30 PM", value: "1:30pm-2:30pm" },
+    { label: "2:30 PM - 3:30 PM", value: "2:30pm-3:30pm" },
+    { label: "3:30 PM - 4:30 PM", value: "3:30pm-4:30pm" },
+  ];
 
   const [data, setData] = useState([
     {
@@ -79,12 +95,42 @@ function LangarSection() {
     },
   ]);
 
-  const onFinish = (values: any) => {
-    console.log(values);
+  const onFinish = async (values: any) => {
+    try {
+      setSuccessMessage("");
+      setLoading(true);
+      const Response = await axiosInstance.post(ENDPOINTS.EVENT_BOOKING, {
+        ...values,
+        fullName: values.fullName,
+        email: values.email,
+        phoneNumber: values.phoneNumber,
+        peopleCount: +values.peopleCount,
+        dateOfBooking: values.dateOfBooking,
+        timeSlot: values.timeSlot,
+        type: "langar",
+      });
+      if (Response.status !== 201) throw new Error("Something went wrong");
+      setSuccessMessage(Response.data.message);
+      form.resetFields();
+      handleCancel();
+    } catch (err: any) {
+      console.log(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
+      {successMessage && (
+        <Alert
+          message={successMessage}
+          type="success"
+          showIcon
+          closeIcon
+          style={{ marginTop: 3 }}
+        />
+      )}
       <Row
         style={{
           margin: "6vh 0",
@@ -126,7 +172,13 @@ function LangarSection() {
             </Typography.Paragraph>
             <CustomButton
               style={{ alignSelf: "center" }}
-              onClick={() => showModal()}
+              onClick={() => {
+                isUserAuthenticate()
+                  ? showModal()
+                  : navigate("/auth/login", {
+                      state: { callbackPath: pathname },
+                    });
+              }}
             >
               Book Now
             </CustomButton>
@@ -210,6 +262,14 @@ function LangarSection() {
           <Row style={{ margin: "2vh 0" }} gutter={32}>
             <Col span={12}>
               <AlphaTextField
+                name="peopleCount"
+                placeholder="Number of People"
+                maxLength={4}
+                rules={[validation.onlyNumbers()]}
+              />
+            </Col>
+            <Col span={12}>
+              <AlphaTextField
                 name="fullName"
                 placeholder="Full Name"
                 rules={[validation.required(), validation.maxLength(30)]}
@@ -244,18 +304,18 @@ function LangarSection() {
               />
             </Col>
             <Col span={24}>
-              <Form.Item
-                label={""}
-                name={"message"}
+              <Typography.Paragraph>Available time Slots</Typography.Paragraph>
+
+              <AlpharadioGroupField
+                name="timeSlot"
+                options={timeData}
                 rules={[validation.required()]}
-              >
-                <Input.TextArea placeholder="Message" allowClear rows={6} />
-              </Form.Item>
+              />
             </Col>
 
             <Flex justify="center" style={{ width: "100%" }}>
               <SubmitButton loading={loading} form={form}>
-                Send
+                Book Now
               </SubmitButton>
             </Flex>
           </Row>
