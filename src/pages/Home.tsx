@@ -51,6 +51,7 @@ function Home() {
             }}
           >
             <Typography.Title
+              className="Merriweather"
               style={{
                 color: "#fff",
                 fontSize: 64,
@@ -59,6 +60,7 @@ function Home() {
               Welcome to Austin Gurdwara
             </Typography.Title>
             <Typography.Text
+              className="Merriweather"
               style={{
                 color: "#fff",
                 fontSize: 28,

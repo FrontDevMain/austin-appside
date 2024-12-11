@@ -142,24 +142,15 @@ function LangarSection() {
           span={screens.md ? 12 : 24}
           style={{ justifyItems: "center", alignSelf: "center" }}
         >
-          <Flex
-            vertical
-            style={{ height: "inherit", width: screens.md ? "80%" : "95%" }}
-          >
-            <Typography.Title
-              level={1}
-              style={{
-                // fontSize: 60,
-                textAlign: "center",
-                marginTop: 0,
-              }}
-            >
+          <Flex vertical style={{ height: "inherit" }}>
+            <Typography.Paragraph className="Merriweather heading_1 center">
               Langar Seva
-            </Typography.Title>{" "}
+            </Typography.Paragraph>{" "}
             <Typography.Paragraph
               style={{
-                fontSize: 16,
                 textAlign: "center",
+                width: screens.md ? "70%" : "95%",
+                margin: "auto",
               }}
             >
               The SSGA appreciates your co-operation and understanding in
@@ -171,7 +162,7 @@ function LangarSection() {
               Maryada.
             </Typography.Paragraph>
             <CustomButton
-              style={{ alignSelf: "center" }}
+              style={{ alignSelf: "center", marginTop: 30 }}
               onClick={() => {
                 isUserAuthenticate()
                   ? showModal()
@@ -219,7 +210,10 @@ function LangarSection() {
                 alt="langer Seva Image 1"
                 style={{ width: "100%" }}
               />
-              <Typography.Title level={4} style={{ marginTop: 5 }}>
+              <Typography.Title
+                style={{ fontSize: 24, fontWeight: 700 }}
+                className="Merriweather"
+              >
                 {item.title}
               </Typography.Title>
               <ul style={{ marginBottom: 40 }}>

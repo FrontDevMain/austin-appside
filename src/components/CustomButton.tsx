@@ -19,10 +19,11 @@ function CustomButton({
         backgroundColor: token.colorTextSecondary,
         color: "#fff",
         outline: "none",
-        border: "",
+        border: "none",
         boxSizing: "border-box",
-        borderRadius: 30,
-        padding: 25,
+        borderRadius: 50,
+        padding: "30px 60px",
+        fontWeight: 600,
         ...style,
       }}
       {...other}

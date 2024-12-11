@@ -22,6 +22,7 @@ function HomeSection() {
             WELCOME
           </Typography.Paragraph>
           <Typography.Title
+            className="Merriweather"
             style={{ fontSize: screens.md ? 72 : 48, marginTop: 0 }}
           >
             Who Are We?
@@ -71,6 +72,7 @@ function HomeSection() {
                     }}
                   ></div>
                   <Typography.Paragraph
+                    className="Merriweather"
                     style={{
                       textAlign: "center",
                       fontSize: 32,
@@ -98,6 +100,7 @@ function HomeSection() {
             WELCOME
           </Typography.Paragraph>
           <Typography.Title
+            className="Merriweather"
             style={{
               fontSize: screens.md ? 72 : 48,
               marginTop: 0,
@@ -108,7 +111,6 @@ function HomeSection() {
           </Typography.Title>
           <Typography.Paragraph
             style={{
-              fontSize: 16,
               textAlign: "center",
             }}
           >
@@ -148,9 +150,9 @@ function HomeSection() {
               <Flex vertical style={{ height: "inherit", width: "80%" }}>
                 {" "}
                 <Typography.Title
+                  className="Merriweather"
                   level={1}
                   style={{
-                    // fontSize: 60,
                     textAlign: "center",
                     marginTop: 0,
                   }}
@@ -159,7 +161,6 @@ function HomeSection() {
                 </Typography.Title>{" "}
                 <Typography.Paragraph
                   style={{
-                    fontSize: 16,
                     textAlign: "center",
                   }}
                 >
@@ -183,9 +184,9 @@ function HomeSection() {
             >
               <Flex vertical style={{ height: "inherit", width: "80%" }}>
                 <Typography.Title
+                  className="Merriweather"
                   level={1}
                   style={{
-                    // fontSize: 60,
                     textAlign: "center",
                     marginTop: 0,
                   }}
@@ -194,7 +195,6 @@ function HomeSection() {
                 </Typography.Title>{" "}
                 <Typography.Paragraph
                   style={{
-                    fontSize: 16,
                     textAlign: "center",
                   }}
                 >

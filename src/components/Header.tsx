@@ -64,8 +64,15 @@ function Header() {
       }}
     >
       <Typography.Title
+        className="Merriweather"
         level={1}
-        style={{ textAlign: "center", color: "#ffffff", paddingTop: 220 }}
+        style={{
+          textAlign: "center",
+          fontWeight: 700,
+          fontSize: 64,
+          color: "#ffffff",
+          paddingTop: 180,
+        }}
       >
         {data.title}
       </Typography.Title>
@@ -73,6 +80,8 @@ function Header() {
         style={{
           textAlign: "center",
           color: "#ffffff",
+          fontWeight: 600,
+          fontSize: 28,
           paddingTop: 60,
         }}
       >

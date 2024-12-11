@@ -90,15 +90,6 @@ function EventBookingSection() {
   return (
     <>
       <Space direction="vertical" size={"large"} style={{ padding: "5vh 0" }}>
-        <Typography.Title
-          style={{
-            fontSize: 72,
-            marginTop: 0,
-            textAlign: "center",
-          }}
-        >
-          Events
-        </Typography.Title>
         {successMessage && (
           <Alert message={successMessage} type="success" showIcon closeIcon />
         )}
@@ -133,14 +124,18 @@ function EventBookingSection() {
                     align="end"
                     justify="space-between"
                   >
-                    <Typography.Title
-                      level={3}
-                      style={{ color: "white", margin: 10 }}
+                    <Typography.Paragraph
+                      style={{
+                        color: "white",
+                        margin: 10,
+                        fontWeight: 700,
+                        fontSize: 24,
+                      }}
                     >
                       Wedding
-                    </Typography.Title>
+                    </Typography.Paragraph>
                     <CustomButton
-                      style={{ margin: 10 }}
+                      style={{ margin: 10, padding: "20px 30px" }}
                       onClick={() => {
                         isUserAuthenticate()
                           ? showModal("wedding")
@@ -182,14 +177,18 @@ function EventBookingSection() {
                     align="end"
                     justify="space-between"
                   >
-                    <Typography.Title
-                      level={3}
-                      style={{ color: "white", margin: 10 }}
+                    <Typography.Paragraph
+                      style={{
+                        color: "white",
+                        margin: 10,
+                        fontWeight: 700,
+                        fontSize: 24,
+                      }}
                     >
                       Langar
-                    </Typography.Title>
+                    </Typography.Paragraph>
                     <CustomButton
-                      style={{ margin: 10 }}
+                      style={{ margin: 10, padding: "20px 30px" }}
                       onClick={() => {
                         isUserAuthenticate()
                           ? showModal("langar")
@@ -237,14 +236,18 @@ function EventBookingSection() {
                         align="end"
                         justify="space-between"
                       >
-                        <Typography.Title
-                          level={3}
-                          style={{ color: "white", margin: 10 }}
+                        <Typography.Paragraph
+                          style={{
+                            color: "white",
+                            margin: 10,
+                            fontWeight: 700,
+                            fontSize: 24,
+                          }}
                         >
                           Akhand Paath
-                        </Typography.Title>
+                        </Typography.Paragraph>
                         <CustomButton
-                          style={{ margin: 10 }}
+                          style={{ margin: 10, padding: "20px 30px" }}
                           onClick={() => {
                             isUserAuthenticate()
                               ? showModal("akhand path")
@@ -285,14 +288,18 @@ function EventBookingSection() {
                         align="end"
                         justify="space-between"
                       >
-                        <Typography.Title
-                          level={3}
-                          style={{ color: "white", margin: 10 }}
+                        <Typography.Paragraph
+                          style={{
+                            color: "white",
+                            margin: 10,
+                            fontWeight: 700,
+                            fontSize: 24,
+                          }}
                         >
                           Birthday
-                        </Typography.Title>
+                        </Typography.Paragraph>
                         <CustomButton
-                          style={{ margin: 10 }}
+                          style={{ margin: 10, padding: "20px 30px" }}
                           onClick={() => {
                             isUserAuthenticate()
                               ? showModal("birthday")
@@ -335,14 +342,18 @@ function EventBookingSection() {
                     align="end"
                     justify="space-between"
                   >
-                    <Typography.Title
-                      level={3}
-                      style={{ color: "white", margin: 10 }}
+                    <Typography.Paragraph
+                      style={{
+                        color: "white",
+                        margin: 10,
+                        fontWeight: 700,
+                        fontSize: 24,
+                      }}
                     >
                       Sehaj Paath
-                    </Typography.Title>
+                    </Typography.Paragraph>
                     <CustomButton
-                      style={{ margin: 10 }}
+                      style={{ margin: 10, padding: "20px 30px" }}
                       onClick={() => {
                         isUserAuthenticate()
                           ? showModal("sehaj path")

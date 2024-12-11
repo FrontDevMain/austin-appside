@@ -152,20 +152,14 @@ function KidsClassSection() {
           style={{ justifyItems: "center", alignSelf: "center" }}
         >
           <Flex vertical style={{ height: "inherit" }}>
-            <Typography.Title
-              level={1}
-              style={{
-                // fontSize: 60,
-                textAlign: "center",
-                marginTop: 0,
-              }}
-            >
+            <Typography.Paragraph className="Merriweather heading_1 center">
               Kids Classes
-            </Typography.Title>{" "}
+            </Typography.Paragraph>{" "}
             <Typography.Paragraph
               style={{
-                fontSize: 16,
                 textAlign: "center",
+                width: screens.md ? "70%" : "100%",
+                margin: "auto",
               }}
             >
               Punjabi classes are held on the first Saturday of every month,
@@ -176,7 +170,7 @@ function KidsClassSection() {
               Gurmat.
             </Typography.Paragraph>
             <CustomButton
-              style={{ alignSelf: "center" }}
+              style={{ alignSelf: "center", marginTop: 30 }}
               onClick={() => {
                 isUserAuthenticate()
                   ? showModal()

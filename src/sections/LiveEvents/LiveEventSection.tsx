@@ -36,41 +36,47 @@ function LiveEventSection() {
 
   return (
     <Row style={{ margin: "5vh 0" }}>
-      <Col>
+      <Col span={24}>
         <Typography.Paragraph
           style={{
             color: token.colorTextSecondary,
-            marginBottom: 0,
             textAlign: "center",
+            marginTop: 30,
           }}
         >
           EVENTS
         </Typography.Paragraph>
-        <Typography.Title
-          style={{
-            fontSize: screens.md ? 72 : 48,
-            marginTop: 0,
-            textAlign: "center",
-          }}
+        <Typography.Paragraph
+          className="Merriweather heading_1 center"
+          style={{ marginBottom: 80 }}
         >
           Upcoming Events
-        </Typography.Title>
+        </Typography.Paragraph>
         {data.map((item) => (
           <Row
             className="scale-content"
             style={{
               boxShadow: "0px 4px 8px 0px #00000040",
               alignItems: "center",
-              marginBottom: 50,
+              marginBottom: 30,
               padding: 20,
             }}
-            gutter={32}
+            gutter={16}
           >
             <Col span={screens.md ? 4 : 24}></Col>
             <Col span={screens.md ? 16 : 24} style={{ alignItems: "center" }}>
-              <Typography.Title level={4}>{item.title}</Typography.Title>
-              <Typography.Paragraph>{item.desc}</Typography.Paragraph>
-              <Typography.Paragraph style={{ color: token.colorTextSecondary }}>
+              <Typography.Paragraph
+                className="Merriweather heading_2"
+                style={{ fontWeight: 700, fontSize: 24 }}
+              >
+                {item.title}
+              </Typography.Paragraph>
+              <Typography.Paragraph style={{ fontWeight: 500 }}>
+                {item.desc}
+              </Typography.Paragraph>
+              <Typography.Paragraph
+                style={{ color: token.colorTextSecondary, fontWeight: 500 }}
+              >
                 {item.date}
               </Typography.Paragraph>
             </Col>

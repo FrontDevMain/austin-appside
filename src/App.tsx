@@ -29,7 +29,7 @@ const App = () => {
           colorText: "#164080",
           colorTextSecondary: "#FF7315",
           borderRadius: 8,
-          fontSize: 16,
+
           colorLink: "#FF7315",
         },
         components: {

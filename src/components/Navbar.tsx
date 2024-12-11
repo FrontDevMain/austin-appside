@@ -189,13 +189,14 @@ const Navbar = () => {
               style={{
                 display: "inline-block",
                 padding: 10,
+                fontWeight: 500,
                 color:
                   isHover == item.key
                     ? token.colorTextSecondary
                     : current == item.key
                     ? token.colorTextSecondary
                     : "#fff",
-                fontSize: 16,
+
                 marginBottom: 10,
                 cursor: "pointer",
               }}
@@ -218,13 +219,14 @@ const Navbar = () => {
             style={{
               display: "inline-block",
               padding: 10,
+              fontWeight: 500,
               color:
                 isHover == "login"
                   ? token.colorTextSecondary
                   : current == "login"
                   ? token.colorTextSecondary
                   : "#fff",
-              fontSize: 16,
+
               marginBottom: 10,
               cursor: "pointer",
             }}

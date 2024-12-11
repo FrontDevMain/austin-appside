@@ -24,15 +24,9 @@ function DiwanSection() {
         <Col span={screens.md ? 12 : 24}>
           <Flex vertical style={{ height: "inherit" }}>
             {" "}
-            <Typography.Title level={1}>Program Schedule</Typography.Title>{" "}
-            <Typography.Paragraph
-              style={{
-                fontSize: 16,
-              }}
-            >
-              A place where devotees unite in faith, finding strength and
-              connection through shared devotion and service.
-            </Typography.Paragraph>
+            <Typography.Title className=" Merriweather heading_1 center">
+              Program Schedule
+            </Typography.Title>{" "}
           </Flex>
           <ul>
             {timeTable.map((item) => (
@@ -41,9 +35,8 @@ function DiwanSection() {
                   <Col span={6}>
                     <Typography.Paragraph
                       style={{
-                        fontWeight: 700,
+                        fontWeight: 600,
                         whiteSpace: "nowrap",
-                        marginBottom: 0,
                       }}
                     >
                       {item.time}
@@ -60,7 +53,9 @@ function DiwanSection() {
           </ul>
           <Typography.Paragraph>
             To Sponsor the Diwan{" "}
-            <Typography.Link style={{ color: token.colorTextSecondary }}>
+            <Typography.Link
+              style={{ color: token.colorTextSecondary, fontWeight: 600 }}
+            >
               Click Here{" "}
             </Typography.Link>
             (Sponsorship Money goes towards gurdwara operating expense)
