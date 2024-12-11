@@ -295,21 +295,21 @@ function KidsClassSection() {
             layout="vertical"
           >
             <Row gutter={32}>
-              <Col span={12}>
+              <Col span={screens.md ? 12 : 24}>
                 <AlphaTextField
                   name="firstName"
                   placeholder="First Name"
                   rules={[validation.required(), validation.maxLength(30)]}
                 />
               </Col>
-              <Col span={12}>
+              <Col span={screens.md ? 12 : 24}>
                 <AlphaTextField
                   name="lastName"
                   placeholder="Last Name"
                   rules={[validation.required(), validation.maxLength(30)]}
                 />
               </Col>
-              <Col span={12}>
+              <Col span={screens.md ? 12 : 24}>
                 <AlphaTextField
                   name="email"
                   placeholder="Email"
@@ -317,7 +317,7 @@ function KidsClassSection() {
                   rules={[validation.required(), validation.maxLength(30)]}
                 />
               </Col>
-              <Col span={12}>
+              <Col span={screens.md ? 12 : 24}>
                 <AlphaTextField
                   name="phoneNumber"
                   placeholder="Phone No."
@@ -329,7 +329,7 @@ function KidsClassSection() {
                   ]}
                 />
               </Col>
-              <Col span={12}>
+              <Col span={screens.md ? 12 : 24}>
                 <AlphaSelectField
                   name="size"
                   placeholder="All Student - Sweatshirt/ T-Shirt Size"
@@ -341,7 +341,7 @@ function KidsClassSection() {
                   ]}
                 />
               </Col>
-              <Col span={12}>
+              <Col span={screens.md ? 12 : 24}>
                 <AlphaTextField
                   name="age"
                   placeholder="Student Age"
@@ -349,7 +349,7 @@ function KidsClassSection() {
                   rules={[validation.required(), validation.onlyNumbers()]}
                 />
               </Col>
-              <Col span={12}>
+              <Col span={screens.md ? 12 : 24}>
                 <AlphaSelectField
                   name="gurmukhiLessons"
                   placeholder="Has your child taken Gurmukhi lessons before?"
@@ -361,7 +361,7 @@ function KidsClassSection() {
                 />
               </Col>
 
-              <Col span={12}>
+              <Col span={screens.md ? 12 : 24}>
                 <AlphaTextField
                   name="etc"
                   placeholder="Anything else we need to know about the students"
@@ -384,7 +384,7 @@ function KidsClassSection() {
             layout="vertical"
           >
             <Row gutter={32}>
-              <Col span={12}>
+              <Col span={screens.md ? 12 : 24}>
                 <AlphaTextField
                   name="parentsName"
                   placeholder="Parents Name"
@@ -392,7 +392,7 @@ function KidsClassSection() {
                 />
               </Col>
 
-              <Col span={12}>
+              <Col span={screens.md ? 12 : 24}>
                 <AlphaTextField
                   name="parentsEmailId"
                   placeholder="Parents Email Id"
@@ -400,7 +400,7 @@ function KidsClassSection() {
                   rules={[validation.required(), validation.maxLength(30)]}
                 />
               </Col>
-              <Col span={12}>
+              <Col span={screens.md ? 12 : 24}>
                 <AlphaTextField
                   name="parentsContact"
                   placeholder="Parents Contact No."
@@ -413,7 +413,7 @@ function KidsClassSection() {
                 />
               </Col>
 
-              <Col span={12}>
+              <Col span={screens.md ? 12 : 24}>
                 <AlphaSelectField
                   name="tablaInterest"
                   placeholder="Will your be interested for learning Kirtan & Tabla?"
@@ -425,7 +425,7 @@ function KidsClassSection() {
                   ]}
                 />
               </Col>
-              <Col span={12}>
+              <Col span={screens.md ? 12 : 24}>
                 <AlphaSelectField
                   name="volunteering"
                   placeholder="Would you be Interested in Volunteering?"
@@ -435,7 +435,7 @@ function KidsClassSection() {
                   ]}
                 />
               </Col>
-              <Col span={12}>
+              <Col span={screens.md ? 12 : 24}>
                 <AlphaTextField
                   name="goals"
                   placeholder="What are your goals for your student in learning punjabi?"

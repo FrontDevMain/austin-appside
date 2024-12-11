@@ -1,27 +1,12 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 export const AuthContext = React.createContext({});
 
 export default function UserLayout() {
-  const isAuthenticated = () => {
-    let isAuthenticated = false;
-    if (
-      typeof window !== "undefined" &&
-      typeof window.localStorage !== "undefined"
-    ) {
-      const authData = localStorage.getItem("auth_austin");
-      if (authData) {
-        isAuthenticated = true;
-      }
-    }
+  const { pathname } = useLocation();
 
-    return isAuthenticated;
-  };
+  if (pathname == "/") return <Navigate to={"/home"} />;
 
-  return (
-    <AuthContext.Provider value={{ isAuthenticated }}>
-      <Outlet />
-    </AuthContext.Provider>
-  );
+  return <Outlet />;
 }

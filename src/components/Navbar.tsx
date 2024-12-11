@@ -63,76 +63,97 @@ const Navbar = () => {
           }}
         >
           <Space style={{ marginLeft: 10, height: 70 }}>
-            <Logo />
+            <div style={{ height: 50, width: 50 }}>
+              <Logo />
+            </div>
           </Space>
           <Space style={{ marginRight: 10 }} onClick={showDrawer}>
-            <img src={hamburgerIcon} height={60} />
+            <img src={hamburgerIcon} height={50} />
           </Space>
         </Flex>
         <Drawer onClose={onClose} open={open}>
-          {navItems.map((item) => {
-            return item.id == 0 ? (
-              <span style={{ margin: "0px 20px" }}>{item.label}</span>
-            ) : (
+          <Flex vertical justify="space-between" style={{ height: "100%" }}>
+            <div>
+              {navItems.map((item) =>
+                item.id == 0 ? (
+                  <span style={{ margin: "0px 20px" }}>{item.label}</span>
+                ) : (
+                  <Typography.Link
+                    key={item.key}
+                    className={isHover || current ? "scale-content" : ""}
+                    onClick={() => {
+                      navigate("/" + item.key);
+                      setCurrent(item.key);
+                      onClose();
+                    }}
+                    onMouseEnter={() => setIsHover(item.key)}
+                    onMouseLeave={() => setIsHover("")}
+                    style={{
+                      display: "block",
+                      padding: 10,
+                      color:
+                        isHover == item.key
+                          ? token.colorTextSecondary
+                          : current == item.key
+                          ? token.colorTextSecondary
+                          : token.colorText,
+                      fontSize: 20,
+                      cursor: "pointer",
+                    }}
+                  >
+                    {item.label}
+                  </Typography.Link>
+                )
+              )}
+            </div>
+
+            <Flex gap={10}>
               <Typography.Link
-                key={item.key}
                 className={isHover || current ? "scale-content" : ""}
                 onClick={() => {
-                  navigate("/" + item.key);
-                  setCurrent(item.key);
-                  onClose();
+                  if (user) {
+                    logout();
+                  } else {
+                    navigate("/auth/login");
+                    onClose();
+                  }
                 }}
-                onMouseEnter={() => setIsHover(item.key)}
+                onMouseEnter={() => setIsHover("login")}
                 onMouseLeave={() => setIsHover("")}
                 style={{
-                  display: "block",
+                  display: "inline-block",
                   padding: 10,
-                  color:
-                    isHover == item.key
-                      ? token.colorTextSecondary
-                      : current == item.key
-                      ? token.colorTextSecondary
-                      : token.colorText,
-                  fontSize: 20,
+                  color: token.colorText,
+                  fontSize: 22,
+                  marginBottom: 10,
                   cursor: "pointer",
+                  border: `1px solid ${token.colorText}`,
+                  borderRadius: 10,
+                  flexGrow: 1,
                 }}
               >
-                {item.label}
+                {user ? "Logout" : " Login"}
               </Typography.Link>
-            );
-          })}
-          <Flex>
-            <Typography.Link
-              className={isHover || current ? "scale-content" : ""}
-              onClick={() => {
-                user ? logout() : navigate("/auth/login");
-              }}
-              onMouseEnter={() => setIsHover("login")}
-              onMouseLeave={() => setIsHover("")}
-              style={{
-                display: "inline-block",
-                padding: 10,
-                color:
-                  isHover == "login"
-                    ? token.colorTextSecondary
-                    : current == "login"
-                    ? token.colorTextSecondary
-                    : "#fff",
-                fontSize: 16,
-                marginBottom: 10,
-                cursor: "pointer",
-              }}
-            >
-              {user ? "Logout" : " Login"}
-            </Typography.Link>
-            <Typography.Paragraph
-              className="donate_button"
-              onClick={() => {
-                navigate("/donation");
-              }}
-            >
-              Donate
-            </Typography.Paragraph>
+              <Typography.Paragraph
+                className="donate_button"
+                onClick={() => {
+                  navigate("/donation");
+                  onClose();
+                }}
+                style={{
+                  padding: 10,
+                  color: token.colorText,
+                  fontSize: 22,
+                  marginBottom: 10,
+                  cursor: "pointer",
+                  border: `1px solid ${token.colorText}`,
+                  borderRadius: 10,
+                  flexGrow: 1,
+                }}
+              >
+                Donate
+              </Typography.Paragraph>
+            </Flex>
           </Flex>
         </Drawer>
       </nav>

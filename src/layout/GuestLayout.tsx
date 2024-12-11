@@ -1,17 +1,18 @@
-import { Col, Flex, Row, Space, Typography } from "antd";
+import { Col, Flex, Grid, Row, Space, Typography } from "antd";
 import { Outlet } from "react-router-dom";
 import bg from "../assets/images/auth/guestBg.svg";
 import icon from "../assets/images/auth/icon.svg";
 
 function GuestLayout() {
+  const screens = Grid.useBreakpoint();
   return (
     <Row style={{ height: "99vh", width: "99vw", padding: 20 }} gutter={16}>
       <Col
-        span={12}
+        span={screens.md ? 12 : 24}
         style={{
           backgroundColor: "#EBF5FF",
           borderRadius: 20,
-          display: "flex",
+          display: screens.md ? "flex" : "none",
           justifyContent: "center",
           alignItems: "center",
         }}
@@ -19,12 +20,13 @@ function GuestLayout() {
         <img src={bg} alt="Background Image" style={{ width: "90%" }} />
       </Col>
       <Col
-        span={12}
+        span={screens.md ? 12 : 24}
         style={{
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignContent: "center",
+          margin: "20px 0px",
         }}
       >
         <div style={{ width: "80%", margin: "auto" }}>

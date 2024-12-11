@@ -153,7 +153,7 @@ function DonationSection() {
             <Alert message={errorMessage} type="error" showIcon closeIcon />
           )}
           <Row style={{ margin: "2vh 0" }} gutter={32}>
-            <Col span={6}>
+            <Col span={screens.md ? 6 : 12}>
               <AlphaSelectField
                 name="currency"
                 placeholder="Currency"
@@ -166,21 +166,21 @@ function DonationSection() {
                 ]}
               />
             </Col>
-            <Col span={18}>
+            <Col span={screens.md ? 18 : 12}>
               <AlphaTextField
                 name="amount"
                 placeholder="Amount"
                 rules={[validation.required(), validation.onlyNumbers()]}
               />
             </Col>
-            <Col span={12}>
+            <Col span={screens.md ? 12 : 24}>
               <AlphaTextField
                 name="firstName"
                 placeholder="First Name"
                 rules={[validation.required(), validation.maxLength(30)]}
               />
             </Col>
-            <Col span={12}>
+            <Col span={screens.md ? 12 : 24}>
               <AlphaTextField
                 name="lastName"
                 placeholder="Last Name"

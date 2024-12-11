@@ -371,7 +371,7 @@ function EventBookingSection() {
         <Divider style={{ margin: 0 }} />
         <Form form={form} name="basic" onFinish={onFinish} layout="vertical">
           <Row style={{ margin: "2vh 0" }} gutter={32}>
-            <Col span={12}>
+            <Col span={screens.md ? 12 : 24}>
               <AlphaTextField
                 name="peopleCount"
                 placeholder="Number of People"
@@ -379,14 +379,14 @@ function EventBookingSection() {
                 rules={[validation.onlyNumbers()]}
               />
             </Col>
-            <Col span={12}>
+            <Col span={screens.md ? 12 : 24}>
               <AlphaTextField
                 name="fullName"
                 placeholder="Full Name"
                 rules={[validation.required(), validation.maxLength(30)]}
               />
             </Col>
-            <Col span={12}>
+            <Col span={screens.md ? 12 : 24}>
               <AlphaTextField
                 name="email"
                 placeholder="Email"
@@ -394,7 +394,7 @@ function EventBookingSection() {
                 rules={[validation.required(), validation.maxLength(30)]}
               />
             </Col>
-            <Col span={12}>
+            <Col span={screens.md ? 12 : 24}>
               <AlphaTextField
                 name="phoneNumber"
                 placeholder="Phone No."
@@ -406,7 +406,7 @@ function EventBookingSection() {
                 ]}
               />
             </Col>
-            <Col span={12}>
+            <Col span={screens.md ? 12 : 24}>
               <AlphaDatePicker
                 name="dateOfBooking"
                 placeholder="DD/MM/YYYY"

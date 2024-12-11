@@ -1,4 +1,4 @@
-import { Alert, Col, Flex, Form, Row, Space, Typography } from "antd";
+import { Alert, Col, Flex, Form, Grid, Row, Space, Typography } from "antd";
 import React, { useState } from "react";
 import { AlphaCheckboxField, AlphaTextField } from "../../components/form";
 import { validation } from "../../components/form/validations";
@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthProvider";
 
 function Register() {
+  const screens = Grid.useBreakpoint();
   const { login } = useAuth();
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -60,14 +61,14 @@ function Register() {
         {errorMessage && <Alert message={errorMessage} type="error" showIcon />}
 
         <Row style={{ margin: "2vh 0", justifyContent: "center" }} gutter={32}>
-          <Col span={12}>
+          <Col span={screens.md ? 12 : 24}>
             <AlphaTextField
               name="fName"
               placeholder="First Name"
               rules={[validation.required(), validation.maxLength(30)]}
             />
           </Col>
-          <Col span={12}>
+          <Col span={screens.md ? 12 : 24}>
             <AlphaTextField
               name="lName"
               placeholder="Last Name"
