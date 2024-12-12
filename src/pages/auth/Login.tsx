@@ -29,7 +29,7 @@ function Login() {
       });
       if (Response.status !== 200) throw new Error("Something went wrong");
       login(Response.data.data);
-      navigate(state.callbackPath || "/home");
+      navigate(state?.callbackPath || "/home");
       form.resetFields();
     } catch (err: any) {
       setErrorMessage(err.message);
