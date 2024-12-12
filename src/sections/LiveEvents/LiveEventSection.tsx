@@ -9,29 +9,30 @@ function LiveEventSection() {
   const { token } = theme.useToken();
   const screens = Grid.useBreakpoint();
 
-  useEffect(() => {
-    getBookings();
-  }, []);
+  // useEffect(() => {
+  //   getBookings();
+  // }, []);
 
-  const getBookings = async () => {
-    try {
-      const Response = await axiosInstance.get(
-        ENDPOINTS.GET_BOOKINGS(1, 5, "")
-      );
-      if (Response.status !== 201) throw new Error("Something went wrong");
-      console.log(Response);
-    } catch (err: any) {
-      console.log(err?.message);
-    }
-  };
+  // const getBookings = async () => {
+  //   try {
+  //     const Response = await axiosInstance.get(
+  //       ENDPOINTS.GET_BOOKINGS(1, 5, "toAttend")
+  //     );
+  //     if (Response.status !== 201) throw new Error("Something went wrong");
+  //     console.log(Response);
+  //   } catch (err: any) {
+  //     console.log(err?.message);
+  //   }
+  // };
 
-  const data = [
+  const [data, setData] = useState([
     {
       id: 0,
       img: "",
       title: "Annual Baisakhi Celebration",
       desc: "Celebrate the Sikh New Year and the Khalsa Day with us! Enjoy prayers, cultural performances, and a festive Langar.",
       date: "April 13, 2025",
+      isAttend: false,
       link: "",
     },
     {
@@ -40,6 +41,7 @@ function LiveEventSection() {
       title: "Youth Kirtan Night",
       desc: "A night dedicated to our youth, where they can lead the congregation in kirtan and learn about Sikh teachings.",
       date: "Every Last Friday of the Month",
+      isAttend: true,
       link: "",
     },
     {
@@ -48,19 +50,20 @@ function LiveEventSection() {
       title: "Annual Baisakhi Celebration",
       desc: "Celebrate the Sikh New Year and the Khalsa Day with us! Enjoy prayers, cultural performances, and a festive Langar.",
       date: "April 13, 2025",
+      isAttend: false,
       link: "",
     },
-  ];
+  ]);
 
-  const attendBooking = async (id: string) => {
-    try {
-      const Response = await axiosInstance.get(ENDPOINTS.ATTEND_BOOKING(id));
-      if (Response.status !== 200) throw new Error("Something went wrong");
-      console.log(Response);
-    } catch (err: any) {
-      console.log(err?.message);
-    }
-  };
+  // const attendBooking = async (id: string) => {
+  //   try {
+  //     const Response = await axiosInstance.get(ENDPOINTS.ATTEND_BOOKING(id));
+  //     if (Response.status !== 200) throw new Error("Something went wrong");
+  //     console.log(Response);
+  //   } catch (err: any) {
+  //     console.log(err?.message);
+  //   }
+  // };
 
   return (
     <Row style={{ margin: "5vh 0" }}>
@@ -81,7 +84,7 @@ function LiveEventSection() {
         </Typography.Paragraph>
         {data.map((item) => (
           <Row
-            className="scale-content"
+            className="scale-card"
             style={{
               boxShadow: "0px 4px 8px 0px #00000040",
               alignItems: "center",
@@ -103,8 +106,19 @@ function LiveEventSection() {
               </Typography.Paragraph>
             </Col>
             <Col span={screens.md ? 6 : 24}>
-              <CustomButton onClick={() => attendBooking(item.id + "")}>
-                Attend
+              <CustomButton
+                onClick={() => {
+                  setData(
+                    data.map((row) =>
+                      item.id == row.id
+                        ? { ...row, isAttend: !row.isAttend }
+                        : { ...row }
+                    )
+                  );
+                }}
+                style={{ padding: "20px 30px" }}
+              >
+                {item.isAttend ? "Attending" : "Attend"}
               </CustomButton>
             </Col>
           </Row>

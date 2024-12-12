@@ -73,6 +73,15 @@ li::marker {
   scale: 1.1;
   transition: 200ms ease-in;
 }
+.scale-card {
+  scale: 1;
+  transition: 200ms ease-in;
+}
+
+.scale-card:hover {
+  scale: 1.05;
+  transition: 200ms ease-in;
+}
 
 .image_effect > img {
   transform: scale(1);

@@ -13,10 +13,11 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config: any) => {
     const data: any = localStorage.getItem("auth_austin");
-    if (data?.token) {
+    console.log(JSON.parse(data).token);
+    if (data) {
       config.headers = {
         ...config.headers,
-        Authorization: `Bearer ${data?.token}`,
+        Authorization: `Bearer ${(JSON.parse(data) as any)?.token}`,
       };
     }
     return config;

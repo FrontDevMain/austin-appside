@@ -9,7 +9,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const login = (data: any) => {
     setUser(data);
-    localStorage.setItem("auth_austin", data);
+    localStorage.setItem("auth_austin", JSON.stringify(data));
   };
   const logout = () => {
     setUser(null);
@@ -18,7 +18,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (isUserAuthenticate()) {
-      setUser(localStorage.getItem("auth_austin"));
+      setUser(JSON.parse(localStorage.getItem("auth_austin") || ""));
     }
   }, []);
 
