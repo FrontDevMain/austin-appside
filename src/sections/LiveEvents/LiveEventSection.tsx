@@ -63,7 +63,7 @@ function LiveEventSection() {
             gutter={16}
           >
             <Col span={screens.md ? 4 : 24}></Col>
-            <Col span={screens.md ? 16 : 24} style={{ alignItems: "center" }}>
+            <Col span={screens.md ? 14 : 24} style={{ alignItems: "center" }}>
               <Typography.Paragraph className="heading_2">
                 {item.title}
               </Typography.Paragraph>
@@ -72,7 +72,7 @@ function LiveEventSection() {
                 {item.date}
               </Typography.Paragraph>
             </Col>
-            <Col span={4}>
+            <Col span={screens.md ? 6 : 24}>
               <CustomButton>Attend</CustomButton>
             </Col>
           </Row>
