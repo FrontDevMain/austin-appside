@@ -10,10 +10,12 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const login = (data: any) => {
     setUser(data);
     localStorage.setItem("auth_austin", JSON.stringify(data));
+    localStorage.setItem("auth_austin_token", data.token);
   };
   const logout = () => {
     setUser(null);
     localStorage.removeItem("auth_austin");
+    localStorage.removeItem("auth_austin_token");
   };
 
   useEffect(() => {
@@ -24,7 +26,10 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const isUserAuthenticate = () => {
     let isAuthenticated = false;
-    if (window?.localStorage && window.localStorage.getItem("auth_austin")) {
+    if (
+      window?.localStorage &&
+      window.localStorage.getItem("auth_austin_token")
+    ) {
       isAuthenticated = true;
     }
     return isAuthenticated;

@@ -33,9 +33,8 @@ function Register() {
       });
       if (Response.status !== 201) throw new Error(Response.data.error.message);
       setSuccessMessage(Response.data.data.message);
-      localStorage.setItem("auth_austin", Response.data.data.user);
       login(Response.data.data.user);
-      navigate("home");
+      navigate("/home");
       form.resetFields();
     } catch (err: any) {
       setErrorMessage(err.message);
