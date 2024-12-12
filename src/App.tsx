@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthProvider from "./auth/AuthProvider";
 
 import Navbar from "./components/Navbar";
-import { ConfigProvider, theme } from "antd";
+import { ConfigProvider, theme, Typography } from "antd";
 import Footer from "./components/Footer";
 
 import ScrollToTop from "./components/scroll-to-top";
@@ -71,11 +71,17 @@ const App = () => {
         },
       }}
     >
-      <Suspense fallback={<></>}>
-        <AuthProvider>
-          <Router>
-            <Navbar />
-            <Routes>
+      <AuthProvider>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Suspense
+              fallback={
+                <Typography style={{ textAlign: "center" }}>
+                  ...Loading
+                </Typography>
+              }
+            >
               <Route path="/" element={<UserLayout />}>
                 <Route path="/home" element={<Home />} />
                 <Route path="/diwan" element={<Diwan />} />
@@ -94,13 +100,13 @@ const App = () => {
                   />
                 </Route>
               </Route>
-            </Routes>
-            <Footer />
+            </Suspense>
+          </Routes>
+          <Footer />
 
-            <ScrollToTop />
-          </Router>
-        </AuthProvider>
-      </Suspense>
+          <ScrollToTop />
+        </Router>
+      </AuthProvider>
     </ConfigProvider>
   );
 };
