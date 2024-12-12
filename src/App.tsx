@@ -71,17 +71,15 @@ const App = () => {
         },
       }}
     >
-      <AuthProvider>
-        <Router>
-          <Navbar />
-          <Routes>
-            <Suspense
-              fallback={
-                <Typography style={{ textAlign: "center" }}>
-                  ...Loading
-                </Typography>
-              }
-            >
+      <Suspense
+        fallback={
+          <Typography style={{ textAlign: "center" }}>...Loading</Typography>
+        }
+      >
+        <AuthProvider>
+          <Router>
+            <Navbar />
+            <Routes>
               <Route path="/" element={<UserLayout />}>
                 <Route path="/home" element={<Home />} />
                 <Route path="/diwan" element={<Diwan />} />
@@ -100,13 +98,13 @@ const App = () => {
                   />
                 </Route>
               </Route>
-            </Suspense>
-          </Routes>
-          <Footer />
+            </Routes>
+            <Footer />
 
-          <ScrollToTop />
-        </Router>
-      </AuthProvider>
+            <ScrollToTop />
+          </Router>
+        </AuthProvider>
+      </Suspense>
     </ConfigProvider>
   );
 };
