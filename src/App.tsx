@@ -1,25 +1,31 @@
-import React, { useEffect } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // auth route
 import AuthProvider from "./auth/AuthProvider";
 
 import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import Login from "./pages/auth/Login";
-import Donate from "./pages/Donate";
 import { ConfigProvider, theme } from "antd";
 import Footer from "./components/Footer";
-import Diwan from "./pages/Diwan";
-import LangerSeva from "./pages/LangerSeva";
-import LiveEvents from "./pages/LiveEvents";
-import EventBooking from "./pages/EventBooking";
-import KidsClasses from "./pages/KidsClasses";
-import ContactUs from "./pages/ContactUs";
+
 import ScrollToTop from "./components/scroll-to-top";
 import UserLayout from "./layout/UserLayout";
 import GuestLayout from "./layout/GuestLayout";
-import Register from "./pages/auth/Register";
-import ForgotPassword from "./pages/auth/ForgotPassword";
+
+//auth
+const Login = lazy(() => import("./pages/auth/Login"));
+const Register = lazy(() => import("./pages/auth/Register"));
+const NewPassword = lazy(() => import("./pages/auth/NewPassword"));
+const ForgotPassword = lazy(() => import("./pages/auth/ForgotPassword"));
+
+//pages
+const Home = lazy(() => import("./pages/Home"));
+const Diwan = lazy(() => import("./pages/Diwan"));
+const LangerSeva = lazy(() => import("./pages/LangerSeva"));
+const LiveEvents = lazy(() => import("./pages/LiveEvents"));
+const Donate = lazy(() => import("./pages/Donate"));
+const EventBooking = lazy(() => import("./pages/EventBooking"));
+const KidsClasses = lazy(() => import("./pages/KidsClasses"));
+const ContactUs = lazy(() => import("./pages/ContactUs"));
 
 const App = () => {
   return (
@@ -65,34 +71,36 @@ const App = () => {
         },
       }}
     >
-      <AuthProvider>
-        <Router>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<UserLayout />}>
-              <Route path="/home" element={<Home />} />
-              <Route path="/diwan" element={<Diwan />} />
-              <Route path="/langer-seva" element={<LangerSeva />} />
-              <Route path="/live-events" element={<LiveEvents />} />
-              <Route path="/event-booking" element={<EventBooking />} />
-              <Route path="/kids-classes" element={<KidsClasses />} />
-              <Route path="/contact-us" element={<ContactUs />} />
-              <Route path="/donation" element={<Donate />} />
-              <Route path="/auth" element={<GuestLayout />}>
-                <Route path="/auth/login" element={<Login />} />
-                <Route path="/auth/Register" element={<Register />} />
-                <Route
-                  path="/auth/forgot-password"
-                  element={<ForgotPassword />}
-                />
+      <Suspense fallback={<></>}>
+        <AuthProvider>
+          <Router>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<UserLayout />}>
+                <Route path="/home" element={<Home />} />
+                <Route path="/diwan" element={<Diwan />} />
+                <Route path="/langer-seva" element={<LangerSeva />} />
+                <Route path="/live-events" element={<LiveEvents />} />
+                <Route path="/event-booking" element={<EventBooking />} />
+                <Route path="/kids-classes" element={<KidsClasses />} />
+                <Route path="/contact-us" element={<ContactUs />} />
+                <Route path="/donation" element={<Donate />} />
+                <Route path="/auth" element={<GuestLayout />}>
+                  <Route path="/auth/login" element={<Login />} />
+                  <Route path="/auth/Register" element={<Register />} />
+                  <Route
+                    path="/auth/forgot-password"
+                    element={<ForgotPassword />}
+                  />
+                </Route>
               </Route>
-            </Route>
-          </Routes>
-          <Footer />
+            </Routes>
+            <Footer />
 
-          <ScrollToTop />
-        </Router>
-      </AuthProvider>
+            <ScrollToTop />
+          </Router>
+        </AuthProvider>
+      </Suspense>
     </ConfigProvider>
   );
 };
