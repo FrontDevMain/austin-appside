@@ -34,6 +34,7 @@ const SubmitButton: React.FC<React.PropsWithChildren<SubmitButtonProps>> = ({
         width: "fit-content",
         backgroundColor: !submittable ? "gray" : token.colorTextSecondary,
         color: "#fff",
+        fontWeight: 700,
         outline: "none",
         border: "",
         boxSizing: "border-box",

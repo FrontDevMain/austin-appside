@@ -3,29 +3,36 @@
 body {
   margin: 0;
   box-sizing: border-box;
+  font-family: "DM Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .ant-typography {
-  font-family: "Montserrat, sans-serif";
-  font-weight: 400;
-  font-weight: 16px;
-  line-height: 19.5px;
-}
-
-.Merriweather {
-  font-family: "Merriweather, serif";
+  font-size: 16px;
 }
 
 .heading_1 {
-  font-weight: 700;
+  /* font-weight: 700; */
   font-size: 56px;
 }
 
 .heading_2 {
-  font-weight: 700;
-  font-size: 24px;
+  font-weight: 600;
+  margin-top: 15px;
+  font-size: 36px;
+}
+
+@media screen and (max-width: 600px) {
+  .heading_1 {
+    font-weight: 700;
+    font-size: 44px;
+  }
+
+  .heading_2 {
+    font-weight: 700;
+    font-size: 28px;
+  }
 }
 
 .center {

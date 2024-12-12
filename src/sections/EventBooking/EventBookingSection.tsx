@@ -125,11 +125,10 @@ function EventBookingSection() {
                     justify="space-between"
                   >
                     <Typography.Paragraph
+                      className="heading_2"
                       style={{
                         color: "white",
                         margin: 10,
-                        fontWeight: 700,
-                        fontSize: 24,
                       }}
                     >
                       Wedding
@@ -178,11 +177,10 @@ function EventBookingSection() {
                     justify="space-between"
                   >
                     <Typography.Paragraph
+                      className="heading_2"
                       style={{
                         color: "white",
                         margin: 10,
-                        fontWeight: 700,
-                        fontSize: 24,
                       }}
                     >
                       Langar
@@ -343,11 +341,10 @@ function EventBookingSection() {
                     justify="space-between"
                   >
                     <Typography.Paragraph
+                      className="heading_2"
                       style={{
                         color: "white",
                         margin: 10,
-                        fontWeight: 700,
-                        fontSize: 24,
                       }}
                     >
                       Sehaj Paath

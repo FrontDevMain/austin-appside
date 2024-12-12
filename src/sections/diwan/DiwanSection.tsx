@@ -24,9 +24,9 @@ function DiwanSection() {
         <Col span={screens.md ? 12 : 24}>
           <Flex vertical style={{ height: "inherit" }}>
             {" "}
-            <Typography.Title className=" Merriweather heading_1 center">
+            <Typography.Paragraph className="heading_2 center">
               Program Schedule
-            </Typography.Title>{" "}
+            </Typography.Paragraph>{" "}
           </Flex>
           <ul>
             {timeTable.map((item) => (
@@ -35,7 +35,7 @@ function DiwanSection() {
                   <Col span={6}>
                     <Typography.Paragraph
                       style={{
-                        fontWeight: 600,
+                        fontWeight: 700,
                         whiteSpace: "nowrap",
                       }}
                     >

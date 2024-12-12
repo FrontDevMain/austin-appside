@@ -78,7 +78,7 @@ function DonationSection() {
           style={{ justifyItems: "center", alignSelf: "center" }}
         >
           <Flex vertical style={{ height: "inherit" }}>
-            <Typography.Paragraph className="Merriweather heading_1 center">
+            <Typography.Paragraph className="heading_1 center">
               Let's Donate
             </Typography.Paragraph>{" "}
             <Typography.Paragraph

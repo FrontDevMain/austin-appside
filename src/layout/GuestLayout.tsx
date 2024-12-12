@@ -6,7 +6,15 @@ import icon from "../assets/images/auth/icon.svg";
 function GuestLayout() {
   const screens = Grid.useBreakpoint();
   return (
-    <Row style={{ height: "99vh", width: "99vw", padding: 20 }} gutter={16}>
+    <Row
+      style={{
+        minHeight: "99vh",
+        width: "99vw",
+        padding: 20,
+        marginTop: screens.md ? 40 : 0,
+      }}
+      gutter={16}
+    >
       <Col
         span={screens.md ? 12 : 24}
         style={{
@@ -29,8 +37,8 @@ function GuestLayout() {
           margin: "20px 0px",
         }}
       >
-        <div style={{ width: "80%", margin: "auto" }}>
-          <Flex align="center" gap={10}>
+        <div style={{ width: screens.md ? "80%" : "95%", margin: "auto" }}>
+          <Flex align="center" gap={6}>
             <img src={icon} width={40} />
             <Typography.Title level={3} style={{ margin: 0, color: "#000000" }}>
               Singh Sabha Gurdwara of Austin

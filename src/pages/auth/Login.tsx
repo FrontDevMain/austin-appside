@@ -40,11 +40,9 @@ function Login() {
 
   return (
     <Row>
-      <Col span={24} style={{ padding: "0 16px" }}>
-        <Typography.Title level={4} color="#000">
-          Login
-        </Typography.Title>
-        <Typography.Paragraph type="secondary">
+      <Col span={24} style={{ padding: 16 }}>
+        <Typography.Paragraph className="heading_2">Login</Typography.Paragraph>
+        <Typography.Paragraph type="secondary" style={{ margin: 0 }}>
           Please login here
         </Typography.Paragraph>
       </Col>
@@ -54,7 +52,7 @@ function Login() {
         )}
         {errorMessage && <Alert message={errorMessage} type="error" showIcon />}
 
-        <Row style={{ margin: "2vh 0", justifyContent: "center" }} gutter={32}>
+        <Row style={{ margin: "1vh 0", justifyContent: "center" }} gutter={32}>
           <Col span={24}>
             <AlphaTextField
               name="email"

@@ -143,7 +143,7 @@ function LangarSection() {
           style={{ justifyItems: "center", alignSelf: "center" }}
         >
           <Flex vertical style={{ height: "inherit" }}>
-            <Typography.Paragraph className="Merriweather heading_1 center">
+            <Typography.Paragraph className="heading_1 center">
               Langar Seva
             </Typography.Paragraph>{" "}
             <Typography.Paragraph
@@ -156,10 +156,9 @@ function LangarSection() {
               The SSGA appreciates your co-operation and understanding in
               preparing a simple Langar as per Guru-Maryada. The management
               would appreciate it if all Langar items be prepared within
-              Gurudwara’ s Kitchen. Please contact the management of Singh Sabha
+              Gurudwara's Kitchen. Please contact the management of Singh Sabha
               or Bhai Sahib if you have plans to bring ready-to-go langar items
-              that are not prepared within Gurdwara’ s kitchen to ensure
-              Maryada.
+              that are not prepared within Gurdwara's kitchen to ensure Maryada.
             </Typography.Paragraph>
             <CustomButton
               style={{ alignSelf: "center", marginTop: 30 }}
@@ -212,7 +211,7 @@ function LangarSection() {
               />
               <Typography.Title
                 style={{ fontSize: 24, fontWeight: 700 }}
-                className="Merriweather"
+                className=""
               >
                 {item.title}
               </Typography.Title>

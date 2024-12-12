@@ -22,7 +22,7 @@ function HomeSection() {
             WELCOME
           </Typography.Paragraph>
           <Typography.Title
-            className="Merriweather"
+            className=""
             style={{ fontSize: screens.md ? 72 : 48, marginTop: 0 }}
           >
             Who Are We?
@@ -72,7 +72,7 @@ function HomeSection() {
                     }}
                   ></div>
                   <Typography.Paragraph
-                    className="Merriweather"
+                    className=""
                     style={{
                       textAlign: "center",
                       fontSize: 32,
@@ -100,7 +100,7 @@ function HomeSection() {
             WELCOME
           </Typography.Paragraph>
           <Typography.Title
-            className="Merriweather"
+            className=""
             style={{
               fontSize: screens.md ? 72 : 48,
               marginTop: 0,
@@ -149,16 +149,9 @@ function HomeSection() {
             >
               <Flex vertical style={{ height: "inherit", width: "80%" }}>
                 {" "}
-                <Typography.Title
-                  className="Merriweather"
-                  level={1}
-                  style={{
-                    textAlign: "center",
-                    marginTop: 0,
-                  }}
-                >
+                <Typography.Paragraph className="heading_2 center">
                   Place Of Peace
-                </Typography.Title>{" "}
+                </Typography.Paragraph>{" "}
                 <Typography.Paragraph
                   style={{
                     textAlign: "center",
@@ -183,16 +176,9 @@ function HomeSection() {
               style={{ justifyItems: "center", alignSelf: "center" }}
             >
               <Flex vertical style={{ height: "inherit", width: "80%" }}>
-                <Typography.Title
-                  className="Merriweather"
-                  level={1}
-                  style={{
-                    textAlign: "center",
-                    marginTop: 0,
-                  }}
-                >
+                <Typography.Paragraph className="heading_2 center">
                   Connect Devotees
-                </Typography.Title>{" "}
+                </Typography.Paragraph>{" "}
                 <Typography.Paragraph
                   style={{
                     textAlign: "center",

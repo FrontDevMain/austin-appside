@@ -41,14 +41,13 @@ function LiveEventSection() {
           style={{
             color: token.colorTextSecondary,
             textAlign: "center",
-            marginTop: 30,
           }}
         >
           EVENTS
         </Typography.Paragraph>
         <Typography.Paragraph
-          className="Merriweather heading_1 center"
-          style={{ marginBottom: 80 }}
+          className="heading_1 center"
+          style={{ marginBottom: 20 }}
         >
           Upcoming Events
         </Typography.Paragraph>
@@ -65,18 +64,11 @@ function LiveEventSection() {
           >
             <Col span={screens.md ? 4 : 24}></Col>
             <Col span={screens.md ? 16 : 24} style={{ alignItems: "center" }}>
-              <Typography.Paragraph
-                className="Merriweather heading_2"
-                style={{ fontWeight: 700, fontSize: 24 }}
-              >
+              <Typography.Paragraph className="heading_2">
                 {item.title}
               </Typography.Paragraph>
-              <Typography.Paragraph style={{ fontWeight: 500 }}>
-                {item.desc}
-              </Typography.Paragraph>
-              <Typography.Paragraph
-                style={{ color: token.colorTextSecondary, fontWeight: 500 }}
-              >
+              <Typography.Paragraph>{item.desc}</Typography.Paragraph>
+              <Typography.Paragraph style={{ color: token.colorTextSecondary }}>
                 {item.date}
               </Typography.Paragraph>
             </Col>

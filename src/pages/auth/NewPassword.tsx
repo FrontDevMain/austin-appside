@@ -36,9 +36,9 @@ function NewPassword() {
   return (
     <Row>
       <Col span={24} style={{ padding: "0 16px" }}>
-        <Typography.Title level={4} color="#000">
+        <Typography.Paragraph className="heading_2">
           NEW PASSWORD
-        </Typography.Title>
+        </Typography.Paragraph>
         <Typography.Paragraph type="secondary">
           Set the new password for your account so you can login and access all
           features

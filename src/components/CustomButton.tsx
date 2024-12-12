@@ -23,7 +23,7 @@ function CustomButton({
         boxSizing: "border-box",
         borderRadius: 50,
         padding: "30px 60px",
-        fontWeight: 600,
+        fontWeight: 700,
         ...style,
       }}
       {...other}

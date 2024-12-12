@@ -68,10 +68,10 @@ function ContactUsSection() {
         <Col span={screens.md ? 8 : 24}>
           <div style={CardStyle}>
             <img src={call} style={ImageStyle} />
-            <Typography.Title level={3} style={{ textAlign: "center" }}>
+            <Typography.Paragraph className="heading_2 center">
               Phone
-            </Typography.Title>
-            <Typography.Paragraph style={{ textAlign: "center" }}>
+            </Typography.Paragraph>
+            <Typography.Paragraph className="center">
               (512) 222-SSGA <br />
               (512-222-7742)
             </Typography.Paragraph>
@@ -80,15 +80,15 @@ function ContactUsSection() {
         <Col span={screens.md ? 8 : 24}>
           <div style={CardStyle}>
             <img src={draft} style={ImageStyle} />
-            <Typography.Title level={3} style={{ textAlign: "center" }}>
+            <Typography.Paragraph className="heading_2 center">
               Email
-            </Typography.Title>
+            </Typography.Paragraph>
             <Typography.Paragraph
               style={{ textAlign: "center", fontWeight: 700, marginBottom: 0 }}
             >
               Board of Trustees
             </Typography.Paragraph>
-            <Typography.Paragraph style={{ textAlign: "center" }}>
+            <Typography.Paragraph className="center">
               bot@ssga.groups.io
             </Typography.Paragraph>
             <Typography.Paragraph
@@ -96,7 +96,7 @@ function ContactUsSection() {
             >
               Executive Committee
             </Typography.Paragraph>
-            <Typography.Paragraph style={{ textAlign: "center" }}>
+            <Typography.Paragraph className="center">
               ec@ssga.groups.io
             </Typography.Paragraph>
             <Typography.Paragraph
@@ -104,7 +104,7 @@ function ContactUsSection() {
             >
               Langar Coordinator
             </Typography.Paragraph>
-            <Typography.Paragraph style={{ textAlign: "center" }}>
+            <Typography.Paragraph className="center">
               langar@austingurdwara.org
             </Typography.Paragraph>
             <Typography.Paragraph
@@ -112,7 +112,7 @@ function ContactUsSection() {
             >
               Kids Kirtan/Punjabi Classes
             </Typography.Paragraph>
-            <Typography.Paragraph style={{ textAlign: "center" }}>
+            <Typography.Paragraph className="center">
               punjabiclass@ssga.groups.io
             </Typography.Paragraph>
           </div>
@@ -120,11 +120,11 @@ function ContactUsSection() {
         <Col span={screens.md ? 8 : 24}>
           <div style={CardStyle}>
             <img src={distance} style={ImageStyle} />
-            <Typography.Title level={3} style={{ textAlign: "center" }}>
+            <Typography.Paragraph className="heading_2 center">
               Address
-            </Typography.Title>
+            </Typography.Paragraph>
 
-            <Typography.Paragraph style={{ textAlign: "center" }}>
+            <Typography.Paragraph className="center">
               6404 J M Holloway Lane, <br /> Austin, Texas 78724 <br />{" "}
               <span style={{ fontWeight: 600 }}>
                 Open Daily from 7 am – 6 pm
@@ -133,7 +133,7 @@ function ContactUsSection() {
           </div>
         </Col>
       </Row>
-      <Row style={{ margin: "5vh 0", justifyContent: "center" }}>
+      <Row style={{ margin: "3vh 0 0vh", justifyContent: "center" }}>
         <Col>
           <Typography.Paragraph
             style={{
@@ -144,15 +144,9 @@ function ContactUsSection() {
           >
             CONTACT US
           </Typography.Paragraph>
-          <Typography.Title
-            style={{
-              fontSize: screens.md ? 72 : 48,
-              marginTop: 0,
-              textAlign: "center",
-            }}
-          >
+          <Typography.Paragraph className="heading_1 center">
             Connect with Us
-          </Typography.Title>
+          </Typography.Paragraph>
         </Col>
       </Row>
       <Form form={form} name="basic" onFinish={onFinish} layout="vertical">
@@ -160,7 +154,7 @@ function ContactUsSection() {
           <Alert message={successMessage} type="success" showIcon closeIcon />
         )}
         {errorMessage && <Alert message={errorMessage} type="error" showIcon />}
-        <Row style={{ margin: "2vh 0", justifyContent: "center" }} gutter={32}>
+        <Row style={{ margin: "1vh 0", justifyContent: "center" }} gutter={32}>
           <Col span={screens.md ? 12 : 24}>
             <AlphaTextField
               name="firstName"

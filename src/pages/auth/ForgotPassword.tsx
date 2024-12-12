@@ -36,9 +36,9 @@ function ForgotPassword() {
   return (
     <Row>
       <Col span={24} style={{ padding: "0 16px" }}>
-        <Typography.Title level={4} color="#000">
+        <Typography.Paragraph className="heading_2">
           FORGOT PASSWORD
-        </Typography.Title>
+        </Typography.Paragraph>
         <Typography.Paragraph type="secondary">
           Enter your email for the verification process. we will send 6 digit
           code to your email.
@@ -50,7 +50,7 @@ function ForgotPassword() {
         )}
         {errorMessage && <Alert message={errorMessage} type="error" showIcon />}
 
-        <Row style={{ margin: "2vh 0", justifyContent: "center" }} gutter={32}>
+        <Row style={{ margin: "1vh 0", justifyContent: "center" }} gutter={32}>
           <Col span={24}>
             <AlphaTextField
               name="email"

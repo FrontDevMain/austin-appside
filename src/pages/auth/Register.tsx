@@ -47,9 +47,9 @@ function Register() {
   return (
     <Row>
       <Col span={24} style={{ padding: "0 16px" }}>
-        <Typography.Title level={4} color="#000">
+        <Typography.Paragraph className="heading_2">
           Register
-        </Typography.Title>
+        </Typography.Paragraph>
         <Typography.Paragraph type="secondary">
           Create new account
         </Typography.Paragraph>

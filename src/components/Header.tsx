@@ -35,7 +35,7 @@ function Header() {
     },
     {
       key: "donation",
-      title: "Events Booking",
+      title: "Donation",
       desc: "Embracing Humanity: The Sacred Tradition of Langar Seva in Gurdwara.",
     },
     {
@@ -60,29 +60,24 @@ function Header() {
         backgroundPosition: "center top",
         backgroundRepeat: "no-repeat",
         marginTop: 60,
-        paddingBottom: 10,
       }}
     >
-      <Typography.Title
-        className="Merriweather"
-        level={1}
+      <Typography.Paragraph
+        className="heading_1 center"
         style={{
-          textAlign: "center",
-          fontWeight: 700,
-          fontSize: 64,
           color: "#ffffff",
           paddingTop: 180,
         }}
       >
         {data.title}
-      </Typography.Title>
+      </Typography.Paragraph>
       <Typography.Paragraph
+        className="heading_2 center"
         style={{
-          textAlign: "center",
           color: "#ffffff",
-          fontWeight: 600,
-          fontSize: 28,
-          paddingTop: 60,
+          fontWeight: 500,
+          fontSize: 20,
+          marginBottom: 0,
         }}
       >
         {data.desc}
