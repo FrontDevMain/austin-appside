@@ -125,6 +125,8 @@ li::marker {
 }
 
 /* custom select  */
+:where(.css-1jkydjq).ant-select-outlined:not(.ant-select-customize-input)
+  .ant-select-selector,
 :where(.css-dev-only-do-not-override-1jkydjq).ant-select-outlined:not(
     .ant-select-customize-input
   )
@@ -135,6 +137,7 @@ li::marker {
   border-radius: 25px;
 }
 
+:where(.css-1jkydjq).ant-select .ant-select-arrow,
 :where(.css-dev-only-do-not-override-1jkydjq).ant-select .ant-select-arrow {
   color: #ff7315;
   inset-inline-end: 23px;
@@ -156,16 +159,19 @@ li::marker {
 }
 
 /* custom date field */
-
+:where(.css-1jkydjq).ant-picker-outlined,
 :where(.css-dev-only-do-not-override-1jkydjq).ant-picker-outlined {
   border-color: #5fafff;
   padding: 20px;
   border-radius: 25px;
 }
 
+:where(.css-1jkydjq).ant-picker-outlined:hover,
 :where(.css-dev-only-do-not-override-1jkydjq).ant-picker-outlined:hover {
   border-color: #ff7315;
 }
+
+:where(.css-1jkydjq).ant-picker .ant-picker-suffix,
 :where(.css-dev-only-do-not-override-1jkydjq).ant-picker .ant-picker-suffix {
   color: #164080;
 }
