@@ -20,7 +20,7 @@ function ForgotPassword() {
       setErrorMessage("");
       setSuccessMessage("");
       setLoading(true);
-      const Response = await axiosInstance.post(ENDPOINTS.LOGIN, {
+      const Response = await axiosInstance.post(ENDPOINTS.FORGOT_PASSWORD, {
         ...values,
       });
       if (Response.status !== 200) throw new Error("Something went wrong");

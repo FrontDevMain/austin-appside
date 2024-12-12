@@ -121,7 +121,7 @@ const Navbar = () => {
                 className={isHover || current ? "scale-content" : ""}
                 onClick={() => {
                   if (user) {
-                    logout();
+                    handleOpenConfirm();
                   } else {
                     navigate("/auth/login");
                     onClose();
@@ -165,6 +165,40 @@ const Navbar = () => {
             </Flex>
           </Flex>
         </Drawer>
+        <Modal
+          title="Confirmation"
+          open={openConfirm}
+          onCancel={handleCloseConfirm}
+          width={400}
+          footer={null}
+        >
+          <Divider style={{ margin: 0 }} />
+          <Typography style={{ margin: "30px auto", textAlign: "center" }}>
+            Are you sure to Logout ?
+          </Typography>
+          <Flex gap={"large"} justify="center">
+            <CustomButton
+              style={{
+                padding: "10px 20px",
+                backgroundColor: "#fff",
+                color: token.colorTextSecondary,
+              }}
+              onClick={handleCloseConfirm}
+            >
+              Cancel
+            </CustomButton>
+            <CustomButton
+              style={{ padding: "10px 20px" }}
+              onClick={() => {
+                logout();
+                handleCloseConfirm();
+                window.location.reload();
+              }}
+            >
+              Confirm
+            </CustomButton>
+          </Flex>
+        </Modal>
       </nav>
     );
   }
