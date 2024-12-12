@@ -76,7 +76,8 @@ function Header() {
         style={{
           color: "#ffffff",
           fontWeight: 500,
-          fontSize: 20,
+          fontSize: 22,
+          paddingBottom: 10,
           marginBottom: 0,
         }}
       >

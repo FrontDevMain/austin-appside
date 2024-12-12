@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import {
+  Divider,
   Drawer,
   Flex,
   Grid,
   Menu,
   MenuProps,
+  Modal,
+  Popconfirm,
   Space,
   theme,
   Typography,
@@ -14,6 +17,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Logo from "./Logo";
 import hamburgerIcon from "../assets/Icons/hamburger.svg";
 import { useAuth } from "../auth/AuthProvider";
+import CustomButton from "./CustomButton";
+import { CloseOutlined } from "@ant-design/icons";
 
 const { useToken } = theme;
 
@@ -30,6 +35,10 @@ const Navbar = () => {
   const showDrawer = () => setOpen(true);
   const onClose = () => setOpen(false);
 
+  const [openConfirm, setOpenConfirm] = useState(false);
+  const handleOpenConfirm = () => setOpenConfirm(true);
+  const handleCloseConfirm = () => setOpenConfirm(false);
+
   useEffect(() => {
     setCurrent(pathname.slice(1, pathname.length));
   }, [pathname]);
@@ -38,11 +47,11 @@ const Navbar = () => {
     { id: 1, label: "Home", key: "home" },
     { id: 2, label: "Diwan", key: "diwan" },
     { id: 3, label: "Langar Seva", key: "langer-seva" },
-    { id: 4, label: "Live Events", key: "live-events" },
+    { id: 5, label: "Event Booking", key: "event-booking" },
     screens.xl
       ? { id: 0, label: <Logo />, key: "home" }
       : { id: 0, label: "", key: "" },
-    { id: 5, label: "Event Booking", key: "event-booking" },
+    { id: 4, label: "Live Events", key: "live-events" },
     { id: 6, label: "Kids Classes", key: "kids-classes" },
     { id: 7, label: "Donation", key: "donation" },
     { id: 8, label: "Contact Us", key: "contact-us" },
@@ -171,6 +180,7 @@ const Navbar = () => {
           top: 0,
           zIndex: 1,
           width: "100%",
+          paddingLeft: 20,
         }}
       >
         {navItems.map((item) => {
@@ -209,30 +219,53 @@ const Navbar = () => {
 
       <div style={{ position: "fixed", right: 40, top: 10, zIndex: 2 }}>
         <Flex>
-          <Typography.Link
-            className={isHover || current ? "scale-content" : ""}
-            onClick={() => {
-              user ? logout() : navigate("/auth/login");
-            }}
-            onMouseEnter={() => setIsHover("login")}
-            onMouseLeave={() => setIsHover("")}
-            style={{
-              display: "inline-block",
-              padding: 10,
-              fontWeight: 500,
-              color:
-                isHover == "login"
-                  ? token.colorTextSecondary
-                  : current == "login"
-                  ? token.colorTextSecondary
-                  : "#fff",
+          {!user ? (
+            <Typography.Link
+              className={isHover || current ? "scale-content" : ""}
+              onClick={() => navigate("/auth/login")}
+              onMouseEnter={() => setIsHover("login")}
+              onMouseLeave={() => setIsHover("")}
+              style={{
+                display: "inline-block",
+                padding: 10,
+                fontWeight: 500,
+                color:
+                  isHover == "login"
+                    ? token.colorTextSecondary
+                    : current == "login"
+                    ? token.colorTextSecondary
+                    : "#fff",
 
-              marginBottom: 10,
-              cursor: "pointer",
-            }}
-          >
-            {user ? "Logout" : " Login"}
-          </Typography.Link>
+                marginBottom: 10,
+                cursor: "pointer",
+              }}
+            >
+              Login
+            </Typography.Link>
+          ) : (
+            <Typography.Link
+              className={isHover || current ? "scale-content" : ""}
+              onClick={handleOpenConfirm}
+              onMouseEnter={() => setIsHover("login")}
+              onMouseLeave={() => setIsHover("")}
+              style={{
+                display: "inline-block",
+                padding: 10,
+                fontWeight: 500,
+                color:
+                  isHover == "login"
+                    ? token.colorTextSecondary
+                    : current == "login"
+                    ? token.colorTextSecondary
+                    : "#fff",
+
+                marginBottom: 10,
+                cursor: "pointer",
+              }}
+            >
+              Logout
+            </Typography.Link>
+          )}
           <Typography.Paragraph
             className="donate_button"
             onClick={() => {
@@ -243,6 +276,40 @@ const Navbar = () => {
           </Typography.Paragraph>
         </Flex>
       </div>
+      <Modal
+        title="Confirmation"
+        open={openConfirm}
+        onCancel={handleCloseConfirm}
+        width={400}
+        footer={null}
+      >
+        <Divider style={{ margin: 0 }} />
+        <Typography style={{ margin: "30px auto", textAlign: "center" }}>
+          Are you sure to Logout ?
+        </Typography>
+        <Flex gap={"large"} justify="center">
+          <CustomButton
+            style={{
+              padding: "10px 20px",
+              backgroundColor: "#fff",
+              color: token.colorTextSecondary,
+            }}
+            onClick={handleCloseConfirm}
+          >
+            Cancel
+          </CustomButton>
+          <CustomButton
+            style={{ padding: "10px 20px" }}
+            onClick={() => {
+              logout();
+              handleCloseConfirm();
+              window.location.reload();
+            }}
+          >
+            Confirm
+          </CustomButton>
+        </Flex>
+      </Modal>
     </nav>
   );
 };
