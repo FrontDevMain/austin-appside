@@ -1,36 +1,41 @@
 import { Alert, Col, Flex, Form, Row, Space, Typography } from "antd";
-import React, { useState } from "react";
-import { AlphaCheckboxField, AlphaTextField } from "../../components/form";
-import { validation } from "../../components/form/validations";
+import { useEffect, useState } from "react";
 import SubmitButton from "../../components/form/SubmitButton";
 import axiosInstance from "../../api/AxiosInstance";
 import { ENDPOINTS } from "../../api/endPoints/EndPoints";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import AlphaCodes from "../../components/form/AlphaCodes";
+import { validation } from "../../components/form/validations";
+import CustomButton from "../../components/CustomButton";
 
-function ForgotPassword() {
-  const [successMessage, setSuccessMessage] = useState("");
+export default function OtpVerification() {
+  const { state } = useLocation();
+
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const [form] = Form.useForm();
 
-  const onFinish = async (values: any) => {
+  useEffect(() => {
+    if (!state?.id) navigate("/auth/login");
+  }, []);
+
+  const onFinish = async () => {
     try {
       setErrorMessage("");
-      setSuccessMessage("");
       setLoading(true);
-      const Response = await axiosInstance.post(ENDPOINTS.FORGOT_PASSWORD, {
-        ...values,
-      });
+      const Response = await axiosInstance.post(
+        ENDPOINTS.VERIFY_OTP(state?.id),
+        { otp: form.getFieldValue("otp") }
+      );
       if (Response.status !== 200) throw new Error("Something went wrong");
-      setSuccessMessage(Response.data.message);
       form.resetFields();
-      navigate("/auth/otp-verification", {
-        state: { id: Response.data.userId },
-      });
+      localStorage.setItem("auth_austin_token", Response.data.token);
+      navigate("/auth/new-password");
     } catch (err: any) {
-      setErrorMessage(err.message);
+      console.log(err);
+      setErrorMessage(err);
     } finally {
       setLoading(false);
     }
@@ -40,34 +45,25 @@ function ForgotPassword() {
     <Row>
       <Col span={24} style={{ padding: "0 16px" }}>
         <Typography.Paragraph className="heading_2">
-          FORGOT PASSWORD
+          Verification
         </Typography.Paragraph>
         <Typography.Paragraph type="secondary">
-          Enter your email for the verification process. we will send 6 digit
-          code to your email.
+          Enter your 6 digit code that you received on your email.
         </Typography.Paragraph>
       </Col>
       <Form form={form} name="basic" onFinish={onFinish} layout="vertical">
-        {successMessage && (
-          <Alert message={successMessage} type="success" showIcon closeIcon />
-        )}
         {errorMessage && <Alert message={errorMessage} type="error" showIcon />}
 
         <Row style={{ margin: "1vh 0", justifyContent: "center" }} gutter={32}>
           <Col span={24}>
-            <AlphaTextField
-              name="email"
-              placeholder="Enter email address"
-              type="email"
-              rules={[validation.required(), validation.maxLength(30)]}
-            />
+            <AlphaCodes name="otp" rules={[validation.required()]} />
           </Col>
 
           <Col span={24}>
             <Flex justify="center">
-              <SubmitButton loading={loading} form={form}>
+              <CustomButton loading={loading} onClick={onFinish}>
                 Continue
-              </SubmitButton>
+              </CustomButton>
             </Flex>
           </Col>
           <Typography.Paragraph style={{ marginTop: 10 }}>
@@ -82,5 +78,3 @@ function ForgotPassword() {
     </Row>
   );
 }
-
-export default ForgotPassword;

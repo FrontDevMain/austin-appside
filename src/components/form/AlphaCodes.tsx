@@ -9,7 +9,7 @@ export default function AlphaCodes({
   rules,
   disabled,
   length = 6,
-  placeholder = "*",
+  placeholder = "-",
 }: InputProps & { length?: number; placeholder?: string; disabled?: boolean }) {
   const [otp, setOtp] = useState(Array(length).fill(""));
   const form = Form.useFormInstance();

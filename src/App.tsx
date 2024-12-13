@@ -14,8 +14,9 @@ import GuestLayout from "./layout/GuestLayout";
 //auth
 const Login = lazy(() => import("./pages/auth/Login"));
 const Register = lazy(() => import("./pages/auth/Register"));
-const NewPassword = lazy(() => import("./pages/auth/NewPassword"));
 const ForgotPassword = lazy(() => import("./pages/auth/ForgotPassword"));
+const OtpVerification = lazy(() => import("./pages/auth/OtpVerification"));
+const NewPassword = lazy(() => import("./pages/auth/NewPassword"));
 
 //pages
 const Home = lazy(() => import("./pages/Home"));
@@ -96,6 +97,11 @@ const App = () => {
                     path="/auth/forgot-password"
                     element={<ForgotPassword />}
                   />
+                  <Route
+                    path="/auth/otp-verification"
+                    element={<OtpVerification />}
+                  />
+                  <Route path="/auth/new-password" element={<NewPassword />} />
                 </Route>
               </Route>
             </Routes>

@@ -16,6 +16,7 @@ const SubmitButton: React.FC<React.PropsWithChildren<SubmitButtonProps>> = ({
   const [submittable, setSubmittable] = React.useState<boolean>(false);
 
   const values = Form.useWatch([], form);
+  console.log(values);
 
   React.useEffect(() => {
     form

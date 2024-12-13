@@ -5,11 +5,13 @@ function CustomButton({
   children,
   style,
   onClick,
+  loading,
   ...other
 }: {
   children: React.ReactNode;
   onClick?: () => void;
   style?: React.CSSProperties;
+  loading?: boolean;
 }) {
   const { token } = theme.useToken();
   return (
@@ -26,8 +28,9 @@ function CustomButton({
         fontWeight: 700,
         ...style,
       }}
-      {...other}
+      loading={loading}
       onClick={onClick}
+      {...other}
     >
       {children}
     </Button>

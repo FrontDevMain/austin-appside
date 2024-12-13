@@ -3,6 +3,7 @@ export const ENDPOINTS = {
   LOGIN: "/api/v1/auth/login",
   REGISTER: "/api/v1/auth/register",
   FORGOT_PASSWORD: "api/v1/auth/forgot-password",
+  VERIFY_OTP: (id: string) => `api/v1/auth/verify-otp/${id}`,
   UPDATE_PASSWORD: "api/v1/auth/update-password",
 
   CONTACT_US: "/api/v1/auth/contact-us",
