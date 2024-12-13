@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import diwanImg from "../../assets/images/diwanImg.svg";
 import { Col, Flex, Grid, Row, theme, Typography } from "antd";
 
 function DiwanSection() {
   const { token } = theme.useToken();
+  const navigate = useNavigate();
   const screens = Grid.useBreakpoint();
 
   const timeTable = [
@@ -55,6 +57,7 @@ function DiwanSection() {
             To Sponsor the Diwan{" "}
             <Typography.Link
               style={{ color: token.colorTextSecondary, fontWeight: 600 }}
+              onClick={() => navigate("/donation")}
             >
               Click Here{" "}
             </Typography.Link>
