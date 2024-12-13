@@ -7,12 +7,16 @@ import axiosInstance from "../../api/AxiosInstance";
 import { ENDPOINTS } from "../../api/endPoints/EndPoints";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthProvider";
+import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 
 function Register() {
   const screens = Grid.useBreakpoint();
   const { login } = useAuth();
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isPasswordShow, setIsPasswordShow] = useState(false);
+  const [isPasswordShow1, setIsPasswordShow1] = useState(false);
+
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -83,18 +87,50 @@ function Register() {
             />
           </Col>
           <Col span={24}>
-            <AlphaTextField
-              name="password"
-              placeholder="Enter Password"
-              rules={[validation.required()]}
-            />
+            <div style={{ position: "relative" }}>
+              <AlphaTextField
+                name="password"
+                placeholder="Enter Password"
+                type={isPasswordShow ? "text" : "password"}
+                rules={[validation.required()]}
+              />
+              <span
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  right: "5%",
+                  transform: "translate(-5%, -50%)",
+                  cursor: "pointer",
+                  fontSize: 20,
+                }}
+                onClick={() => setIsPasswordShow(!isPasswordShow)}
+              >
+                {isPasswordShow ? <EyeFilled /> : <EyeInvisibleFilled />}
+              </span>
+            </div>
           </Col>
           <Col span={24}>
-            <AlphaTextField
-              name="confirmPassword"
-              placeholder="Confirm Password"
-              rules={[validation.required()]}
-            />
+            <div style={{ position: "relative" }}>
+              <AlphaTextField
+                name="confirmPassword"
+                placeholder="Confirm Password"
+                type={isPasswordShow1 ? "text" : "password"}
+                rules={[validation.required()]}
+              />
+              <span
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  right: "5%",
+                  transform: "translate(-5%, -50%)",
+                  cursor: "pointer",
+                  fontSize: 20,
+                }}
+                onClick={() => setIsPasswordShow1(!isPasswordShow1)}
+              >
+                {isPasswordShow1 ? <EyeFilled /> : <EyeInvisibleFilled />}
+              </span>
+            </div>
           </Col>
           <Col span={24}>
             <AlphaCheckboxField
